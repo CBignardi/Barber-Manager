@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="Update Scene Builder">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newappointment-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newcustomer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newcustomer-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -40,21 +45,22 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/chrib/IdeaProjects/barberManager/src/main/resources/com/bignardi/barbermanager&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chrib/IdeaProjects/barberManager/src/main/resources/com/bignardi/barbermanager",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chrib\IdeaProjects\barberManager\src\main\resources\com\bignardi\barbermanager" />
@@ -77,7 +83,9 @@
       <updated>1714418524328</updated>
       <workItem from="1714418701496" duration="1520000" />
       <workItem from="1714486369799" duration="1996000" />
-      <workItem from="1714554394625" duration="672000" />
+      <workItem from="1714554394625" duration="1309000" />
+      <workItem from="1714633794086" duration="108000" />
+      <workItem from="1715022273645" duration="3275000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -95,7 +103,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714492416531</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update Scene Builder">
+      <option name="closed" value="true" />
+      <created>1714557831820</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714557831820</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
