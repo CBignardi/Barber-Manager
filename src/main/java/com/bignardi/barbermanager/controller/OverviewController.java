@@ -1,6 +1,7 @@
 package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Client;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -28,6 +29,20 @@ public class OverviewController {
     private TableColumn<Client, String> thirdDayColumn;
     @FXML
     private TableColumn<Client, String> fourthDayColumn;
+
+    @FXML
+    public void initialize() {
+
+
+    }
+
+    ObservableList<Cl>
+
+    private void showClientTable(Client client){
+
+    }
+
+
 
     @FXML
     public void handleNewCustomer() {

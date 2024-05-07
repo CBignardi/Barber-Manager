@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/jmetro/base_extras.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.OverviewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/jmetro/light_theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.OverviewController">
    <top>
       <SplitPane dividerPositions="0.35" orientation="VERTICAL" prefHeight="75.0" BorderPane.alignment="CENTER">
         <items>
@@ -96,8 +96,8 @@
                   </Label>
                   <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="175.0">
                     <columns>
-                      <TableColumn fx:id="firstDayColumn" prefWidth="59.999998450279236" text="Hour" />
-                        <TableColumn fx:id="firstDayColumn1" prefWidth="112.79999542236328" text="Name" />
+                      <TableColumn fx:id="firstDayHourColumn" prefWidth="64.80001676082611" text="Hour" />
+                        <TableColumn fx:id="firstDayNameColumn" prefWidth="107.9999771118164" text="Name" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
