@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/jmetro/base_extras.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/jmetro/base_extras.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.OverviewController">
    <top>
       <SplitPane dividerPositions="0.35" orientation="VERTICAL" prefHeight="75.0" BorderPane.alignment="CENTER">
         <items>
@@ -33,7 +33,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Add new customer" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleNewCustomer" text="Add new customer" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -94,9 +94,10 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="175.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn fx:id="firstDayColumn" prefWidth="59.999998450279236" text="Hour" />
+                        <TableColumn fx:id="firstDayColumn1" prefWidth="112.79999542236328" text="Name" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -111,9 +112,9 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="secondDayTable" prefHeight="455.0" prefWidth="175.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn fx:id="secondDayColumn" prefWidth="75.0" text="Name" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -128,9 +129,9 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="thirdDayTable" prefHeight="455.0" prefWidth="175.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn fx:id="thirdDayColumn" prefWidth="75.0" text="Name" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -145,9 +146,9 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="fourthDayTable" prefHeight="455.0" prefWidth="175.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn fx:id="fourthDayColumn" prefWidth="75.0" text="Name" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

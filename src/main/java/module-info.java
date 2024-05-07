@@ -1,8 +1,6 @@
-module com.bignardi.barbermanager {
+open module com.bignardi.barbermanager {
+    requires java.desktop;
+    requires java.sql;
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens com.bignardi.barbermanager to javafx.fxml;
-    exports com.bignardi.barbermanager;
 }

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="420.0" spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <SplitPane dividerPositions="0.7" prefHeight="60.0" prefWidth="420.0">
-        <items>
+<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.NewCustomerController">
+   <content>
+      <HBox alignment="CENTER" fillHeight="false" spacing="5.0">
+         <children>
             <VBox alignment="CENTER_LEFT" fillWidth="false" spacing="2.0">
                <children>
                   <Label text="Name:">
@@ -21,7 +21,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="255.0" />
+                  <TextField fx:id="nameField" prefHeight="26.0" prefWidth="255.0" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -37,22 +37,17 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="53.0" />
+                  <TextField fx:id="averageTimeField" prefHeight="26.0" prefWidth="53.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
                </padding>
             </VBox>
-        </items>
-      </SplitPane>
-      <HBox alignment="CENTER" fillHeight="false">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="62.0" text="Done">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Button>
          </children>
       </HBox>
-   </children>
-</VBox>
+   </content>
+   <buttonTypes>
+      <ButtonType fx:constant="OK" />
+      <ButtonType fx:constant="CANCEL" />
+   </buttonTypes>
+</DialogPane>
