@@ -1,23 +1,32 @@
 package com.bignardi.barbermanager.model;
 
-import java.util.Date;
 
 public class Client {
     private String name;
-    private int averageTime = 20;
-    private int date;
+    private int averageTime;
+    private DayDate date;
+    private String stringHourMin;
 
-    public Client(String name, int averageTime) {
+    public Client(String name, int averageTime, DayDate date) {
         this.name = name;
         this.averageTime = averageTime;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
         this.date = date;
+        stringHourMin = date.getHour() + ":" + date.getMinute();
+
+    }
+
+    public Client(String name, DayDate date) {
+        this.name = name;
+        this.date = date;
+        stringHourMin = date.getHour() + ":" + date.getMinute();
+        averageTime = 20;
+    }
+
+    public Client(String name, int year, int month, int day, int hour, int min) {
+        this.name = name;
+        date = new DayDate(year, month, day, hour, min);
+        stringHourMin = hour + ":" + min;
+        averageTime = 20;
     }
 
     public String getName() {

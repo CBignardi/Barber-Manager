@@ -1,14 +1,15 @@
 package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Client;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class OverviewController {
     @FXML
@@ -32,16 +33,19 @@ public class OverviewController {
 
     @FXML
     public void initialize() {
-
-
+        firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("averageTime"));
+        firstDayTable.setItems(getClientData());
     }
 
-    ObservableList<Cl>
-
-    private void showClientTable(Client client){
-
+    ObservableList<Client> getClientData() {
+        ObservableList<Client> clients = FXCollections.observableArrayList();
+        clients.add(new Client("Christian", 2024, 4, 24, 15, 30));
+        //clients.add(new Client("Alfonso"));
+        //clients.add(new Client("Giovanni"));
+        //clients.add(new Client("Luca"));
+        return clients;
     }
-
 
 
     @FXML
@@ -59,7 +63,7 @@ public class OverviewController {
 
             dialog.showAndWait();
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
