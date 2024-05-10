@@ -7,33 +7,35 @@ public class Client {
     private String name;
     private int averageTime;
     private DayDate date;
-    private int min;
-    private int hour;
     private String stringHourMin;
 
+    public String getStringHourMin() {
+        return stringHourMin;
+    }
+
+    public void setStringHourMin(String stringHourMin) {
+        this.stringHourMin = stringHourMin;
+    }
 
     public Client(String name, int averageTime, DayDate date) {
         this.name = name;
         this.averageTime = averageTime;
         this.date = date;
-        stringHourMin = date.getHour() + ":" + date.getMinute();
-
+        stringHourMin = date.toStringFormat();
     }
 
     public Client(String name, DayDate date) {
         this.name = name;
         this.date = date;
-        stringHourMin = date.getHour() + ":" + date.getMinute();
+        stringHourMin = date.toStringFormat();
         averageTime = 20;
     }
 
     public Client(String name, int year, int month, int day, int hour, int min) {
         this.name = name;
         date = new DayDate(year, month, day, hour, min);
-        stringHourMin = hour + "";
-        this.hour = hour;
+        stringHourMin = date.toStringFormat();
         averageTime = 20;
-        this.min = min;
     }
 
     public String getName() {

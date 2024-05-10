@@ -6,8 +6,6 @@ public class DayDate {
     private int day;
     private int hour;
     private int minute;
-    private String stringHourMin;
-
 
 
     public DayDate(int year, int month, int day, int hour, int minute) throws IllegalArgumentException {
@@ -19,7 +17,6 @@ public class DayDate {
         this.year = year;
         this.hour = hour;
         this.minute = minute;
-        stringHourMin = toStringHourMin();
     }
 
     public int getDay() {
@@ -73,8 +70,20 @@ public class DayDate {
                 '}';
     }
 
-    public String toStringHourMin() {
-        return hour + ":" + minute;
+    public String toStringFormat() {
+        StringBuilder dst = new StringBuilder();
+        if (hour < 10) {
+            dst.append("0");
+        }
+        dst.append(hour);
+        dst.append(":");
+
+        if (minute < 10) {
+            dst.append("0");
+        }
+        dst.append(minute);
+
+        return dst.toString();
     }
 
 

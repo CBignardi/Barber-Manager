@@ -24,30 +24,34 @@ public class OverviewController {
     @FXML
     private TableColumn<Client, String> firstDayNameColumn;
     @FXML
-    private TableColumn<Client, Integer> firstDayHourColumn;
-    @FXML
-    private TableColumn<Client, Integer> firstDayMinColumn;
+    private TableColumn<Client, String> firstDayHourColumn;
     @FXML
     private TableColumn<Client, String> secondDayColumn;
     @FXML
+    private TableColumn<Client, String> secondDayHourColumn;
+    @FXML
     private TableColumn<Client, String> thirdDayColumn;
     @FXML
+    private TableColumn<Client, String> thirdDayHourColumn;
+    @FXML
     private TableColumn<Client, String> fourthDayColumn;
+    @FXML
+    private TableColumn<Client, String> fourthDayHourColumn;
 
     @FXML
     public void initialize() {
         firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));
-        firstDayMinColumn.setCellValueFactory(new PropertyValueFactory<>("min"));
+        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
         firstDayTable.setItems(getClientData());
     }
 
     ObservableList<Client> getClientData() {
         ObservableList<Client> clients = FXCollections.observableArrayList();
-        clients.add(new Client("Christian", 2024, 4, 24, 15, 30));
-        //clients.add(new Client("Alfonso"));
-        //clients.add(new Client("Giovanni"));
-        //clients.add(new Client("Luca"));
+        clients.add(new Client("Christian", 2024, 4, 24, 15, 5));
+        clients.add(new Client("Alfonso", 2024, 4,24, 16, 15));
+        clients.add(new Client("Giovanni", 2024, 4, 24, 16,45));
+        clients.add(new Client("Luca", 2024, 4, 24, 14,0));
+        // fai sort in base all'ora
         return clients;
     }
 
