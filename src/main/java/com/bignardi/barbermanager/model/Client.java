@@ -1,11 +1,16 @@
 package com.bignardi.barbermanager.model;
 
 
+import javafx.util.StringConverter;
+
 public class Client {
     private String name;
     private int averageTime;
     private DayDate date;
+    private int min;
+    private int hour;
     private String stringHourMin;
+
 
     public Client(String name, int averageTime, DayDate date) {
         this.name = name;
@@ -25,8 +30,10 @@ public class Client {
     public Client(String name, int year, int month, int day, int hour, int min) {
         this.name = name;
         date = new DayDate(year, month, day, hour, min);
-        stringHourMin = hour + ":" + min;
+        stringHourMin = hour + "";
+        this.hour = hour;
         averageTime = 20;
+        this.min = min;
     }
 
     public String getName() {

@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/DayDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/DayDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,58 +47,28 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Maven.barberManager.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/chrib/IdeaProjects/barberManager/src/main/resources/com/bignardi/barbermanager",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.barberManager.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chrib/IdeaProjects/barberManager/src/main/resources/com/bignardi/barbermanager&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chrib\IdeaProjects\barberManager\src\main\resources\com\bignardi\barbermanager" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="barberManager" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="cmdOptions" />
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list />
-            </option>
-            <option name="multimoduleDir" />
-            <option name="pomFileName" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="projectsCmdOptionValues">
-              <list />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -120,7 +91,8 @@
       <workItem from="1714633794086" duration="108000" />
       <workItem from="1715022273645" duration="3892000" />
       <workItem from="1715091600516" duration="4814000" />
-      <workItem from="1715193086063" duration="2890000" />
+      <workItem from="1715193086063" duration="3157000" />
+      <workItem from="1715328951005" duration="2060000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -170,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715096402151</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Update">
+      <option name="closed" value="true" />
+      <created>1715196232517</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715196232517</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

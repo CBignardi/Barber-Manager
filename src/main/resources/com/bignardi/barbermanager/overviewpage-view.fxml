@@ -94,10 +94,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn fx:id="firstDayHourColumn" prefWidth="64.80001676082611" text="Hour" />
-                        <TableColumn fx:id="firstDayNameColumn" prefWidth="107.9999771118164" text="Name" />
+                      <TableColumn fx:id="firstDayHourColumn" prefWidth="59.999998450279236" text="Hour" />
+                        <TableColumn fx:id="firstDayMinColumn" prefWidth="70.39997100830078" text="Min" />
+                        <TableColumn fx:id="firstDayNameColumn" prefWidth="71.19995880126953" text="Name" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -112,7 +113,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="secondDayTable" prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="secondDayTable" prefHeight="455.0" prefWidth="150.0">
                      <columns>
                         <TableColumn fx:id="secondDayColumn" prefWidth="75.0" text="Name" />
                      </columns>

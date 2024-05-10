@@ -1,6 +1,7 @@
 package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Client;
+import com.bignardi.barbermanager.model.DayDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +26,8 @@ public class OverviewController {
     @FXML
     private TableColumn<Client, Integer> firstDayHourColumn;
     @FXML
+    private TableColumn<Client, Integer> firstDayMinColumn;
+    @FXML
     private TableColumn<Client, String> secondDayColumn;
     @FXML
     private TableColumn<Client, String> thirdDayColumn;
@@ -34,7 +37,8 @@ public class OverviewController {
     @FXML
     public void initialize() {
         firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("averageTime"));
+        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));
+        firstDayMinColumn.setCellValueFactory(new PropertyValueFactory<>("min"));
         firstDayTable.setItems(getClientData());
     }
 
