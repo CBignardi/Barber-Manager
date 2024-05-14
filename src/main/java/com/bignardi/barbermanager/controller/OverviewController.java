@@ -11,6 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Optional;
 
 public class OverviewController {
     @FXML
@@ -45,12 +48,26 @@ public class OverviewController {
         firstDayTable.setItems(getClientData());
     }
 
+    void showWrongDateAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Alert");
+        alert.setHeaderText("Wrong date");
+        alert.setContentText("Please insert a correct date, you put a date that doesn't exist!");
+        alert.showAndWait();
+    }
+
     ObservableList<Client> getClientData() {
         ObservableList<Client> clients = FXCollections.observableArrayList();
-        clients.add(new Client("Christian", 2024, 4, 24, 15, 5));
-        clients.add(new Client("Alfonso", 2024, 4,24, 16, 15));
-        clients.add(new Client("Giovanni", 2024, 4, 24, 16,45));
-        clients.add(new Client("Luca", 2024, 4, 24, 14,0));
+        try {
+            clients.add(new Client("Christian", 2024, 4, 24, 15, 5));
+            clients.add(new Client("Alfonso", 2024, 4, 24, 16, 15));
+            clients.add(new Client("Giovanni", 2024, 4, 24, 16, 45));
+            clients.add(new Client("Luca", 2024, 4, 24, 14, 0));
+        }catch (IllegalArgumentException e){
+            showWrongDateAlert();
+        }
+
+
         // fai sort in base all'ora
         return clients;
     }
@@ -64,12 +81,20 @@ public class OverviewController {
             DialogPane view = loader.load();
             NewCustomerController controller = loader.getController();
 
+            //controller.setClient(new Client("Name", 20);
+
+
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("New Customer");
             dialog.initModality(Modality.WINDOW_MODAL);
             dialog.setDialogPane(view);
 
             dialog.showAndWait();
+
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+                firstDayTable.getItems().add(controller.getClient());
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

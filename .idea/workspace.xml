@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewCustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/DayDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/DayDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,8 @@
       <workItem from="1715091600516" duration="4814000" />
       <workItem from="1715193086063" duration="3157000" />
       <workItem from="1715328951005" duration="2146000" />
-      <workItem from="1715345677545" duration="1269000" />
+      <workItem from="1715345677545" duration="1483000" />
+      <workItem from="1715677270280" duration="2541000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -159,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715331125980</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Update">
+      <option name="closed" value="true" />
+      <created>1715347124217</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715347124217</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

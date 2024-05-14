@@ -1,7 +1,9 @@
 package com.bignardi.barbermanager.model;
 
 
-import javafx.util.StringConverter;
+import javafx.collections.ObservableList;
+
+import java.util.Comparator;
 
 public class Client {
     private String name;
@@ -31,11 +33,23 @@ public class Client {
         averageTime = 20;
     }
 
-    public Client(String name, int year, int month, int day, int hour, int min) {
+    public Client(String name, int year, int month, int day, int hour, int min) throws IllegalArgumentException {
         this.name = name;
         date = new DayDate(year, month, day, hour, min);
         stringHourMin = date.toStringFormat();
         averageTime = 20;
+    }
+
+    public static void sort(ObservableList<Client> clients){
+
+    }
+
+    public DayDate getDate() {
+        return date;
+    }
+
+    public void setDate(DayDate date) {
+        this.date = date;
     }
 
     public String getName() {
