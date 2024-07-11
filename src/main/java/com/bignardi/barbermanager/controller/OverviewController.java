@@ -1,7 +1,6 @@
 package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Client;
-import com.bignardi.barbermanager.model.DayDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 public class OverviewController {
@@ -56,6 +54,7 @@ public class OverviewController {
         alert.showAndWait();
     }
 
+
     ObservableList<Client> getClientData() {
         ObservableList<Client> clients = FXCollections.observableArrayList();
         try {
@@ -66,9 +65,7 @@ public class OverviewController {
         }catch (IllegalArgumentException e){
             showWrongDateAlert();
         }
-
-
-        // fai sort in base all'ora
+        clients.sort((a1, a2) -> a1.getDate().compareTo(a2.getDate()));
         return clients;
     }
 

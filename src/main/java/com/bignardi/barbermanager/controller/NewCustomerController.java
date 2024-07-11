@@ -19,7 +19,7 @@ public class NewCustomerController {
 
     void update() {
         nameField.textProperty().set(client.getName());
-        averageTimeField.textProperty().set(client.getAverageTime() + "");
+        averageTimeField.textProperty().set(client.getDuration() + "");
     }
 
 
