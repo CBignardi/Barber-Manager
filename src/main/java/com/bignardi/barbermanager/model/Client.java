@@ -1,16 +1,11 @@
 package com.bignardi.barbermanager.model;
 
-
-import javafx.collections.ObservableList;
-
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Client {
     private String name;
     private int duration;
-    private LocalDate date;
+    private LocalDateTime date;
     private String stringHourMin;
 
     public String getStringHourMin() {
@@ -21,32 +16,33 @@ public class Client {
         this.stringHourMin = stringHourMin;
     }
 
-    public Client(String name, int averageTime, LocalDate date) {
+    public Client(String name, int averageTime, LocalDateTime date) {
         this.name = name;
         this.duration = duration;
         this.date = date;
         stringHourMin = "c";
     }
 
-    public Client(String name, LocalDate date) {
+    public Client(String name, LocalDateTime date) {
         this.name = name;
         this.date = date;
         stringHourMin = date.toString();
-        averageTime = 20;
+        duration = 20;
     }
 
     public Client(String name, int year, int month, int day, int hour, int min) throws IllegalArgumentException {
         this.name = name;
         //date = new LocalDate.atTime(year, month, day, hour, min);
-        stringHourMin = date.toString();
-        averageTime = 20;
+        //stringHourMin = date.toString();
+        stringHourMin = "a";
+        duration = 20;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

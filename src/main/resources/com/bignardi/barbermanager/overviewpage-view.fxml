@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles/jmetro/light_theme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.OverviewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.OverviewController">
    <top>
       <SplitPane dividerPositions="0.35" orientation="VERTICAL" prefHeight="75.0" BorderPane.alignment="CENTER">
         <items>
@@ -94,7 +94,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="firstDayTable" onMouseClicked="#handleNewAppointment" prefHeight="455.0" prefWidth="175.0">
                     <columns>
                       <TableColumn fx:id="firstDayHourColumn" prefWidth="59.999998450279236" text="Date" />
                         <TableColumn fx:id="firstDayNameColumn" prefWidth="71.19995880126953" text="Name" />

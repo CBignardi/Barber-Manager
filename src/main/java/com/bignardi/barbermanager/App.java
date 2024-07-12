@@ -19,6 +19,7 @@ public class App extends Application {
         Parent view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("overviewpage-view.fxml")));
         Scene scene = new Scene(view);
         stage.setTitle("Barber Manager");
+        //scene.getStylesheets().add(getClass().getResource("styles/jmetro/light_theme.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

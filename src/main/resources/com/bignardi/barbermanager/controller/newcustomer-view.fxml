@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bignardi.barbermanager.controller.NewCustomerController">
    <content>
       <HBox alignment="CENTER" fillHeight="false" spacing="5.0">
