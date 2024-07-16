@@ -3,14 +3,17 @@ package com.bignardi.barbermanager.controller;
 import com.bignardi.barbermanager.model.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 
+import java.io.CharArrayReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 
 public class OverviewController {
@@ -38,13 +41,57 @@ public class OverviewController {
     private TableColumn<Client, String> fourthDayColumn;
     @FXML
     private TableColumn<Client, String> fourthDayHourColumn;
+    private ArrayList<Client> clients;
 
     @FXML
     public void initialize() {
+        clients = new ArrayList<>();
         firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
-        firstDayTable.setItems(getClientData());
+
+        showTables(0);
     }
+
+    public void fillClientsExample(){
+
+    }
+
+    public void addClient(Client client) {
+        clients.add(client);
+        clients.sort(Comparator.comparing(Client::getDate));
+    }
+
+    public void removeClient(Client client) {
+        clients.remove(client);
+    }
+
+    public void showTables(int offsetFirstDay) {
+        ObservableList<Client> subClients;
+        LocalDate day = clients.getFirst().getDate().toLocalDate();
+        day.plusDays(offsetFirstDay);
+        ArrayList<TableView<Client>> tableViews = new ArrayList<>(4);
+        tableViews.add(firstDayTable);
+        tableViews.add(secondDayTable);
+        tableViews.add(thirdDayTable);
+        tableViews.add(fourthDayTable);
+
+        for (int i = 0; i < 4; i++) {
+            subClients = getSubClients(day);
+            tableViews.get(i).setItems(subClients);
+            day.plusDays(1);
+        }
+    }
+
+    private ObservableList<Client> getSubClients(LocalDate Day) {
+        ObservableList<Client> subClients = FXCollections.observableArrayList();
+        for (Client client : clients) {
+            if (client.getDate().toLocalDate().equals(Day)) {
+                subClients.add(client);
+            }
+        }
+        return subClients;
+    }
+
 
     void showWrongDateAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -65,7 +112,6 @@ public class OverviewController {
         } catch (IllegalArgumentException e) {
             showWrongDateAlert();
         }
-        // clients.sort((a1, a2) -> a1.getDate().compareTo(a2.getDate()));
         return clients;
     }
 

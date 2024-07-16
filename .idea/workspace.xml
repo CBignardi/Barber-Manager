@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewAppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newappointment-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newappointment-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newcustomer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newcustomer-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/overviewpage-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +64,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode.CSS",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -116,7 +112,8 @@
       <workItem from="1720704863945" duration="6102000" />
       <workItem from="1720769155969" duration="3042000" />
       <workItem from="1720772356632" duration="111000" />
-      <workItem from="1720772479116" duration="5841000" />
+      <workItem from="1720772479116" duration="5983000" />
+      <workItem from="1721140300275" duration="3547000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -214,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720712727557</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Update">
+      <option name="closed" value="true" />
+      <created>1720797369557</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720797369557</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

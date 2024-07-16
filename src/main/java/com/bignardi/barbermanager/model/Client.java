@@ -32,8 +32,6 @@ public class Client {
 
     public Client(String name, int year, int month, int day, int hour, int min) throws IllegalArgumentException {
         this.name = name;
-        //date = new LocalDate.atTime(year, month, day, hour, min);
-        //stringHourMin = date.toString();
         stringHourMin = "a";
         duration = 20;
     }

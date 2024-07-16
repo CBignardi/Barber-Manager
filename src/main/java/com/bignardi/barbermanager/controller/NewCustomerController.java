@@ -17,6 +17,7 @@ public class NewCustomerController {
         averageTimeField.textProperty().addListener((observable, oldValue, newValue) -> client.setAverageTime(Integer.parseInt(newValue)));
     }
 
+
     void update() {
         nameField.textProperty().set(client.getName());
         averageTimeField.textProperty().set(client.getDuration() + "");

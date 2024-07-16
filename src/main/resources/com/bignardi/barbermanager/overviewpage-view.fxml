@@ -45,14 +45,15 @@
             </MenuBar>
             <SplitPane dividerPositions="0.7" prefHeight="42.0">
                <items>
-                  <HBox alignment="CENTER_LEFT" spacing="7.0">
+                  <HBox alignment="CENTER" spacing="8.0">
                      <children>
-                        <Label text="Find a free space:">
+                        <Label text="Manage an appointment:">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="55.0" text="Find" />
+                        <Button mnemonicParsing="false" onAction="#handleNewAppointment" prefHeight="27.0" prefWidth="45.0" text="New" />
+                        <Button mnemonicParsing="false" prefHeight="27.0" text="Remove" />
                      </children>
                      <padding>
                         <Insets left="15.0" />
@@ -94,7 +95,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="firstDayTable" onMouseClicked="#handleNewAppointment" prefHeight="455.0" prefWidth="175.0">
+                  <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="175.0">
                     <columns>
                       <TableColumn fx:id="firstDayHourColumn" prefWidth="59.999998450279236" text="Date" />
                         <TableColumn fx:id="firstDayNameColumn" prefWidth="71.19995880126953" text="Name" />
