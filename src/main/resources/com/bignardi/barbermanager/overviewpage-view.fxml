@@ -77,11 +77,11 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="45.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="&lt;&lt;" />
-            <Button alignment="CENTER" mnemonicParsing="false" text="&lt;" />
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefWidth="60.0" text="Today" />
-            <Button mnemonicParsing="false" text="&gt;" />
-            <Button mnemonicParsing="false" text="&gt;&gt;" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#setPreviousFourDay" text="&lt;&lt;" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#setPreviousDay" text="&lt;" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#setToday" prefWidth="60.0" text="Today" />
+            <Button mnemonicParsing="false" onAction="#setNextDay" text="&gt;" />
+            <Button mnemonicParsing="false" onAction="#setNextFourDay" text="&gt;&gt;" />
          </children>
       </HBox>
    </bottom>
@@ -90,14 +90,14 @@
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <Label text="First Day">
+                  <Label fx:id="textFirstDay" text="First Day">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <TableView fx:id="firstDayTable" prefHeight="455.0" prefWidth="175.0">
                     <columns>
-                      <TableColumn fx:id="firstDayHourColumn" prefWidth="59.999998450279236" text="Date" />
+                      <TableColumn fx:id="firstDayHourColumn" prefWidth="59.999998450279236" text="Hour" />
                         <TableColumn fx:id="firstDayNameColumn" prefWidth="71.19995880126953" text="Name" />
                     </columns>
                      <columnResizePolicy>
@@ -108,15 +108,15 @@
             </VBox>
             <VBox alignment="CENTER">
                <children>
-                  <Label text="Second Day">
+                  <Label fx:id="textSecondDay" text="Second Day">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <TableView fx:id="secondDayTable" prefHeight="455.0" prefWidth="175.0">
                      <columns>
-                        <TableColumn fx:id="secondDayHourColumn" prefWidth="59.999998450279236" text="Date" />
-                        <TableColumn fx:id="secondDayColumn" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="secondDayHourColumn" prefWidth="59.999998450279236" text="Hour" />
+                        <TableColumn fx:id="secondDayNameColumn" prefWidth="75.0" text="Name" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -126,15 +126,15 @@
             </VBox>
             <VBox alignment="CENTER">
                <children>
-                  <Label text="Third Day">
+                  <Label fx:id="textThirdDay" text="Third Day">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <TableView fx:id="thirdDayTable" prefHeight="455.0" prefWidth="175.0">
                      <columns>
-                        <TableColumn fx:id="thirdDayHourColumn" prefWidth="59.999998450279236" text="Date" />
-                        <TableColumn fx:id="thirdDayColumn" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="thirdDayHourColumn" prefWidth="59.999998450279236" text="Hour" />
+                        <TableColumn fx:id="thirdDayNameColumn" prefWidth="75.0" text="Name" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -144,15 +144,15 @@
             </VBox>
             <VBox alignment="CENTER">
                <children>
-                  <Label text="Fourth Day">
+                  <Label fx:id="textFourthDay" text="Fourth Day">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <TableView fx:id="fourthDayTable" prefHeight="455.0" prefWidth="175.0">
                      <columns>
-                        <TableColumn fx:id="fourthDayHourColumn" prefWidth="59.999998450279236" text="Date" />
-                        <TableColumn fx:id="fourthDayColumn" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="fourthDayHourColumn" prefWidth="59.999998450279236" text="Hour" />
+                        <TableColumn fx:id="fourthDayNameColumn" prefWidth="75.0" text="Name" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
