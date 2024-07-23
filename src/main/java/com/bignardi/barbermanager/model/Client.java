@@ -18,7 +18,11 @@ public class Client {
         this.stringHourMin = stringHourMin;
     }
 
-    public Client(String name, int averageTime, LocalDateTime date) {
+    public Client(){
+
+    }
+
+    public Client(String name, int duration, LocalDateTime date) {
         this.name = name;
         this.duration = duration;
         this.date = date;
@@ -28,13 +32,14 @@ public class Client {
     public Client(String name, LocalDateTime date) {
         this.name = name;
         this.date = date;
-        stringHourMin = date.toString();
+        stringHourMin = date.format(DateTimeFormatter.ofPattern("HH mm"));
         duration = 20;
     }
 
     public Client(String name, int year, int month, int day, int hour, int min) throws IllegalArgumentException {
         this.name = name;
-        stringHourMin = "a";
+        date = LocalDateTime.of(year, month, day, hour, min);
+        stringHourMin = date.format(DateTimeFormatter.ofPattern("HH mm"));
         duration = 20;
     }
 
@@ -58,10 +63,19 @@ public class Client {
         return duration;
     }
 
-    public void setAverageTime(int duration) throws IllegalArgumentException {
+    public void setDuration(int duration) {
         if (duration <= 0) {
-            throw new IllegalArgumentException();
+            this.duration = 0;
         }
         this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", duration=" + duration +
+                ", date=" + date.toString() +
+                '}';
     }
 }

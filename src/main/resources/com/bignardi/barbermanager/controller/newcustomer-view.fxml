@@ -31,12 +31,12 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" fillWidth="false" spacing="2.0">
                <children>
-                  <Label text="Average time:">
+                  <Label text="Duration:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="averageTimeField" prefHeight="26.0" prefWidth="53.0" />
+                  <TextField fx:id="durationField" prefHeight="26.0" prefWidth="53.0" />
                </children>
                <padding>
                   <Insets left="10.0" />

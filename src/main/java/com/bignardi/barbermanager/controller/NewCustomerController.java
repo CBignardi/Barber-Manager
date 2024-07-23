@@ -8,19 +8,19 @@ public class NewCustomerController {
     @FXML
     private TextField nameField;
     @FXML
-    private TextField averageTimeField;
-    Client usualClient;
+    private TextField durationField;
+    private Client usualClient = new Client();
 
     @FXML
     public void initialize() {
         nameField.textProperty().addListener((observable, oldValue, newValue) -> usualClient.setName(newValue));
-        averageTimeField.textProperty().addListener((observable, oldValue, newValue) -> usualClient.setAverageTime(Integer.parseInt(newValue)));
+        durationField.textProperty().addListener((observable, oldValue, newValue) -> usualClient.setDuration(Integer.parseInt(newValue)));
     }
 
 
     void update() {
         nameField.textProperty().set(usualClient.getName());
-        averageTimeField.textProperty().set(usualClient.getDuration() + "");
+        durationField.textProperty().set(usualClient.getDuration() + "");
     }
 
 

@@ -51,8 +51,8 @@ public class OverviewController {
     private Label textFourthDay;
     @FXML
     private DatePicker goToDay;
-    private ArrayList<Client> clients;
-    private ArrayList<Client> usualClients;
+    private static ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<Client> usualClients = new ArrayList<>();
     private LocalDate dayView;
     private ArrayList<TableView<Client>> tableViews;
     private ArrayList<Label> labels;
@@ -93,14 +93,18 @@ public class OverviewController {
     public void addClient(Client client) {
         clients.add(client);
         clients.sort(Comparator.comparing(Client::getDate));
+        System.out.println("Cliente: " + client.toString());
+        updateTables();
     }
 
     public void removeClient(Client client) {
         clients.remove(client);
+        updateTables();
     }
 
     public void addUsualClient(Client client) {
         usualClients.add(client);
+        System.out.println("usual client: " + usualClients.toString());
         usualClients.sort(Comparator.comparing(Client::getName));
     }
 
@@ -108,15 +112,15 @@ public class OverviewController {
         usualClients.remove(client);
     }
 
-    public ArrayList<Client> getArrayUsualClient(){
-        return  usualClients;
+    public static ArrayList<Client> getArrayUsualClient(){
+        return usualClients;
     }
 
     public void updateTables() {
         ObservableList<Client> subClients;
         LocalDate day = dayView;
         for (int i = 0; i < 4; i++) {
-            subClients = getSubClients(dayView);
+            subClients = getSubClients(day);
             tableViews.get(i).setItems(subClients);
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
@@ -162,8 +166,6 @@ public class OverviewController {
             DialogPane view = loader.load();
             NewCustomerController controller = loader.getController();
 
-            //controller.setClient(new Client("Name", 20);
-
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("New Customer");
             dialog.initModality(Modality.WINDOW_MODAL);
@@ -172,6 +174,7 @@ public class OverviewController {
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 addUsualClient(controller.getUsualClient());
+                System.out.println("get client");
             }
 
         } catch (IOException e) {
@@ -187,7 +190,7 @@ public class OverviewController {
             DialogPane view = loader.load();
             NewAppointmentController controller = loader.getController();
 
-            //controller.setClient(new Client("Name", 20);
+            controller.setArrayName(clients);
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("New Appointment");
@@ -196,7 +199,8 @@ public class OverviewController {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                Client guest = controller.getClient();
+                addClient(controller.getClient());
+                System.out.println("ho aggiunto");
             }
 
         } catch (IOException e) {
