@@ -27,9 +27,4 @@ public class NewCustomerController {
     public Client getUsualClient() {
         return usualClient;
     }
-
-    public void setClient(Client client) {
-        this.usualClient = client;
-        update();
-    }
 }

@@ -1,6 +1,8 @@
 package com.bignardi.barbermanager.model;
 
+import java.text.Format;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Client {
     private String name;
@@ -20,7 +22,7 @@ public class Client {
         this.name = name;
         this.duration = duration;
         this.date = date;
-        stringHourMin = "c";
+        stringHourMin = date.format(DateTimeFormatter.ofPattern("HH mm"));
     }
 
     public Client(String name, LocalDateTime date) {

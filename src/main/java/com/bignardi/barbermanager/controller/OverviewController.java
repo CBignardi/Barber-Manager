@@ -49,6 +49,8 @@ public class OverviewController {
     private Label textThirdDay;
     @FXML
     private Label textFourthDay;
+    @FXML
+    private DatePicker goToDay;
     private ArrayList<Client> clients;
     private ArrayList<Client> usualClients;
     private LocalDate dayView;
@@ -104,6 +106,10 @@ public class OverviewController {
 
     public void removeUsualClient(Client client) {
         usualClients.remove(client);
+    }
+
+    public ArrayList<Client> getArrayUsualClient(){
+        return  usualClients;
     }
 
     public void updateTables() {
@@ -191,7 +197,29 @@ public class OverviewController {
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 Client guest = controller.getClient();
-                System.out.println(guest.toString());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleRemoveAppointment() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("removenewcustomer-view.fxml"));
+            DialogPane view = loader.load();
+            RemoveAppointmentController controller = loader.getController();
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Remove Appointment");
+            dialog.initModality(Modality.WINDOW_MODAL);
+            dialog.setDialogPane(view);
+
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+                removeUsualClient(controller.getClient());
             }
 
         } catch (IOException e) {
@@ -226,6 +254,12 @@ public class OverviewController {
     @FXML
     public void setNextFourDay() {
         dayView = dayView.plusDays(4);
+        updateTables();
+    }
+
+    @FXML
+    public void setGoToDay() {
+        dayView = goToDay.getValue();
         updateTables();
     }
 }

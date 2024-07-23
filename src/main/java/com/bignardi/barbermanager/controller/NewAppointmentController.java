@@ -29,34 +29,13 @@ public class NewAppointmentController {
     public int duration;
     public String timeAppointment;
     private StringConverter<LocalDate> dateConverted;
+    private LocalDate date;
     public LocalDateTime localDateTime;
-
-
-    public void getName(ActionEvent event) {
-        name = nameField.getText();
-        System.out.println("name: " + name);
-    }
-
-    public void getDuration(ActionEvent event) {
-        duration = Integer.parseInt(durationField.getText());
-        System.out.println("duration: " + duration);
-    }
-
-    public void getTimeAppointment(ActionEvent event) {
-        timeAppointment = timeField.getText();
-        System.out.println("time appointment: " + timeAppointment);
-    }
-
-    public void getDate(ActionEvent event) {
-        //date = datePicker.getValue();
-        //System.out.println("date: " + date.toString());
-    }
 
     public Client getClient() {
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
-        LocalDate date = LocalDate.parse(dateConverted.toString());
         localDateTime = LocalDateTime.of(date, localTime);
-        return new Client(name, localDateTime);
+        return new Client(name, duration, localDateTime);
     }
 
     @FXML
@@ -64,15 +43,15 @@ public class NewAppointmentController {
         nameField.textProperty().addListener((observable, oldValue, newValue) -> name = newValue);
         durationField.textProperty().addListener((observable, oldValue, newValue) -> duration = Integer.parseInt(newValue));
         timeField.textProperty().addListener((observable, oldValue, newValue) -> timeAppointment = newValue);
-        datePicker.converterProperty().addListener((observable, oldValue, newValue) -> dateConverted = newValue);
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> date = newValue);
     }
-
+/*
     void update() {
         nameField.textProperty().set(name);
         durationField.textProperty().set(duration + "");
         timeField.textProperty().set(timeAppointment);
         datePicker.converterProperty().set(dateConverted);
-    }
+    }*/
 
 
 }

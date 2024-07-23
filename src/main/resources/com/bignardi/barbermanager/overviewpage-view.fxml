@@ -53,7 +53,7 @@
                            </font>
                         </Label>
                         <Button mnemonicParsing="false" onAction="#handleNewAppointment" prefHeight="27.0" prefWidth="45.0" text="New" />
-                        <Button mnemonicParsing="false" prefHeight="27.0" text="Remove" />
+                        <Button mnemonicParsing="false" onAction="#handleRemoveAppointment" prefHeight="27.0" text="Remove" />
                      </children>
                      <padding>
                         <Insets left="15.0" />
@@ -66,7 +66,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <DatePicker prefHeight="25.0" prefWidth="130.0" />
+                        <DatePicker fx:id="goToDay" onAction="#setGoToDay" prefHeight="25.0" prefWidth="130.0" />
                      </children>
                   </HBox>
                </items>
