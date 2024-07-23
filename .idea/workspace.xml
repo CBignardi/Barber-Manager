@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="Update">
+    <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="Before changing the structure">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Appointment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewAppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/NewCustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/RemoveAppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/RemoveAppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newappointment-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newappointment-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newcustomer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/newcustomer-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/removenewcustomer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/bignardi/barbermanager/controller/removeappointment-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +59,7 @@
     "Maven.barberManager.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chrib/Desktop/UniMore/JavaFX/javafx-sdk-22.0.1/lib",
@@ -154,7 +157,7 @@
       <workItem from="1721655361390" duration="6835000" />
       <workItem from="1721672168431" duration="1319000" />
       <workItem from="1721719308494" duration="4795000" />
-      <workItem from="1721737933884" duration="4299000" />
+      <workItem from="1721737933884" duration="6666000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -284,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721724742490</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Before changing the structure">
+      <option name="closed" value="true" />
+      <created>1721743974142</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1721743974142</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +315,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Scene Builder" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Before changing the structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before changing the structure" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

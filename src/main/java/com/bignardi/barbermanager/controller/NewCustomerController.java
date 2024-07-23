@@ -1,5 +1,6 @@
 package com.bignardi.barbermanager.controller;
 
+import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -9,7 +10,7 @@ public class NewCustomerController {
     private TextField nameField;
     @FXML
     private TextField durationField;
-    private Client usualClient = new Client();
+    private Client usualClient;
 
     @FXML
     public void initialize() {

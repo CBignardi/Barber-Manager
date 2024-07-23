@@ -1,6 +1,6 @@
 package com.bignardi.barbermanager.controller;
 
-import com.bignardi.barbermanager.model.Client;
+import com.bignardi.barbermanager.model.Appointment;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
@@ -9,27 +9,23 @@ import java.util.ArrayList;
 public class RemoveAppointmentController {
     @FXML
     private ChoiceBox<String> choiceBoxName;
-    private ArrayList<String> arrayName;
-    private Client client;
+    private ArrayList<String> arrayClientsName;
+    private Appointment appointment;
 
     @FXML
     public void initialize() {
-        arrayName = getArrayUsualClientName();
-        choiceBoxName.getItems().addAll(arrayName);
-
+        choiceBoxName.getItems().addAll(arrayClientsName);
     }
 
-    private ArrayList<String> getArrayUsualClientName(){
-        OverviewController c = new OverviewController();
-        for(Client client1 : c.getArrayUsualClient()){
-            arrayName.add(client1.getName());
+    public void setArrayClientsName(ArrayList<Appointment> appointments){
+        for(Appointment appointment : appointments){
+            arrayClientsName.add(appointment.getClient().getName());
         }
-        System.out.println(arrayName.toString());
-        return arrayName;
     }
 
-    public Client getClient(){
-        return client;
+
+    public Appointment getAppointment(){
+        return appointment;
     }
 
 }

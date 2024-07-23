@@ -1,5 +1,6 @@
 package com.bignardi.barbermanager.controller;
 
+import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -29,17 +30,18 @@ public class NewAppointmentController {
     private String timeAppointment;
     private LocalDate date;
     private LocalDateTime localDateTime;
-    private ArrayList<String> arrayName;
+    private ArrayList<String> arrayClientsName;
 
-    public Client getClient() {
+    public Appointment getAppointment() {
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
         localDateTime = LocalDateTime.of(date, localTime);
-        return new Client(name, duration, localDateTime);
+        Client client = new Client(name, duration);
+        return new Appointment(client, localDateTime);
     }
 
-    public void setArrayName(ArrayList<Client> clients){
+    public void setArrayClientsName(ArrayList<Client> clients){
         for(Client client : clients){
-            arrayName.add(client.getName());
+            arrayClientsName.add(client.getName());
         }
     }
 
@@ -51,7 +53,7 @@ public class NewAppointmentController {
         timeField.textProperty().addListener((observable, oldValue, newValue) -> timeAppointment = newValue);
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> date = newValue);
         try {
-            choiceBox.getItems().addAll(arrayName);
+            choiceBox.getItems().addAll(arrayClientsName);
         }catch (NullPointerException ignored){
         }
 
@@ -63,18 +65,19 @@ public class NewAppointmentController {
     }
 
 
+    /* fatto con altra verisone di set, poi cancellare
     private ArrayList<String> getArrayUsualClientName() throws NullPointerException {
-        ArrayList<Client> arrayClients = OverviewController.getArrayUsualClient();
-        if (!arrayClients.isEmpty()) {
-            for (Client client1 : arrayClients) {
-                System.out.println(client1.toString());
-                arrayName.add(client1.getName());
+        ArrayList<Appointment> arrayAppointments = OverviewController.getArrayUsualClient();
+        if (!arrayAppointments.isEmpty()) {
+            for (Appointment appointment1 : arrayAppointments) {
+                System.out.println(appointment1.toString());
+                arrayName.add(appointment1.getName());
             }
         }
 
         System.out.println(arrayName.toString());
         return arrayName;
-    }
+    }*/
 
 
     /*

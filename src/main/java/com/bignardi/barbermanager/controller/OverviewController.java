@@ -1,5 +1,6 @@
 package com.bignardi.barbermanager.controller;
 
+import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,29 +19,29 @@ import java.util.Optional;
 
 public class OverviewController {
     @FXML
-    private TableView<Client> firstDayTable;
+    private TableView<Appointment> firstDayTable;
     @FXML
-    private TableView<Client> secondDayTable;
+    private TableView<Appointment> secondDayTable;
     @FXML
-    private TableView<Client> thirdDayTable;
+    private TableView<Appointment> thirdDayTable;
     @FXML
-    private TableView<Client> fourthDayTable;
+    private TableView<Appointment> fourthDayTable;
     @FXML
     private TableColumn<Client, String> firstDayNameColumn;
     @FXML
-    private TableColumn<Client, String> firstDayHourColumn;
+    private TableColumn<Appointment, String> firstDayHourColumn;
     @FXML
     private TableColumn<Client, String> secondDayNameColumn;
     @FXML
-    private TableColumn<Client, String> secondDayHourColumn;
+    private TableColumn<Appointment, String> secondDayHourColumn;
     @FXML
     private TableColumn<Client, String> thirdDayNameColumn;
     @FXML
-    private TableColumn<Client, String> thirdDayHourColumn;
+    private TableColumn<Appointment, String> thirdDayHourColumn;
     @FXML
     private TableColumn<Client, String> fourthDayNameColumn;
     @FXML
-    private TableColumn<Client, String> fourthDayHourColumn;
+    private TableColumn<Appointment, String> fourthDayHourColumn;
     @FXML
     private Label textFirstDay;
     @FXML
@@ -51,15 +52,15 @@ public class OverviewController {
     private Label textFourthDay;
     @FXML
     private DatePicker goToDay;
-    private static ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static ArrayList<Client> usualClients = new ArrayList<>();
     private LocalDate dayView;
-    private ArrayList<TableView<Client>> tableViews;
+    private ArrayList<TableView<Appointment>> tableViews;
     private ArrayList<Label> labels;
 
     @FXML
     public void initialize() {
-        clients = new ArrayList<>();
+        appointments = new ArrayList<>();
         usualClients = new ArrayList<>();
         firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
@@ -81,8 +82,8 @@ public class OverviewController {
         labels.add(textThirdDay);
         labels.add(textFourthDay);
 
-        if (!clients.isEmpty()) {
-            dayView = clients.getFirst().getDate().toLocalDate();
+        if (!appointments.isEmpty()) {
+            dayView = appointments.getFirst().getDate().toLocalDate();
         } else {
             dayView = LocalDate.now();
         }
@@ -90,26 +91,26 @@ public class OverviewController {
         updateTables();
     }
 
-    public void addClient(Client client) {
-        clients.add(client);
-        clients.sort(Comparator.comparing(Client::getDate));
-        System.out.println("Cliente: " + client.toString());
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+        appointments.sort(Comparator.comparing(Appointment::getDate));
+        //System.out.println("Cliente: " + appointment.toString());
         updateTables();
     }
 
-    public void removeClient(Client client) {
-        clients.remove(client);
+    public void removeAppointment(Appointment appointment) {
+        appointments.remove(appointment);
         updateTables();
     }
 
-    public void addUsualClient(Client client) {
-        usualClients.add(client);
+    public void addUsualClient(Client usualClient) {
+        usualClients.add(usualClient);
         System.out.println("usual client: " + usualClients.toString());
         usualClients.sort(Comparator.comparing(Client::getName));
     }
 
-    public void removeUsualClient(Client client) {
-        usualClients.remove(client);
+    public void removeUsualClient(Client usualClient) {
+        usualClients.remove(usualClient);
     }
 
     public static ArrayList<Client> getArrayUsualClient(){
@@ -117,24 +118,24 @@ public class OverviewController {
     }
 
     public void updateTables() {
-        ObservableList<Client> subClients;
+        ObservableList<Appointment> subAppointments;
         LocalDate day = dayView;
         for (int i = 0; i < 4; i++) {
-            subClients = getSubClients(day);
-            tableViews.get(i).setItems(subClients);
+            subAppointments = getSubClients(day);
+            tableViews.get(i).setItems(subAppointments);
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
         }
     }
 
-    private ObservableList<Client> getSubClients(LocalDate Day) {
-        ObservableList<Client> subClients = FXCollections.observableArrayList();
-        for (Client client : clients) {
-            if (client.getDate().toLocalDate().equals(Day)) {
-                subClients.add(client);
+    private ObservableList<Appointment> getSubClients(LocalDate Day) {
+        ObservableList<Appointment> subAppointments = FXCollections.observableArrayList();
+        for (Appointment appointment : appointments) {
+            if (appointment.getDate().toLocalDate().equals(Day)) {
+                subAppointments.add(appointment);
             }
         }
-        return subClients;
+        return subAppointments;
     }
 
     void showWrongDateAlert() {
@@ -145,18 +146,21 @@ public class OverviewController {
         alert.showAndWait();
     }
 
-    ObservableList<Client> getClientData() {
-        ObservableList<Client> clients = FXCollections.observableArrayList();
+    /* da correggere apointment in client
+    ObservableList<Appointment> getClientData() {
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
         try {
-            clients.add(new Client("Christian", 2024, 4, 24, 15, 5));
-            clients.add(new Client("Alfonso", 2024, 4, 24, 16, 15));
-            clients.add(new Client("Giovanni", 2024, 4, 24, 16, 45));
-            clients.add(new Client("Luca", 2024, 4, 24, 14, 0));
+            appointments.add(new Appointment("Christian", 2024, 4, 24, 15, 5));
+            appointments.add(new Appointment("Alfonso", 2024, 4, 24, 16, 15));
+            appointments.add(new Appointment("Giovanni", 2024, 4, 24, 16, 45));
+            appointments.add(new Appointment("Luca", 2024, 4, 24, 14, 0));
         } catch (IllegalArgumentException e) {
             showWrongDateAlert();
         }
-        return clients;
+        return appointments;
     }
+    */
+
 
     @FXML
     public void handleNewCustomer() {
@@ -190,7 +194,7 @@ public class OverviewController {
             DialogPane view = loader.load();
             NewAppointmentController controller = loader.getController();
 
-            controller.setArrayName(clients);
+            controller.setArrayClientsName(usualClients);
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("New Appointment");
@@ -199,7 +203,7 @@ public class OverviewController {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                addClient(controller.getClient());
+                addAppointment(controller.getAppointment());
                 System.out.println("ho aggiunto");
             }
 
@@ -212,9 +216,12 @@ public class OverviewController {
     public void handleRemoveAppointment() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("removenewcustomer-view.fxml"));
+            loader.setLocation(getClass().getResource("removeappointment-view.fxml"));
             DialogPane view = loader.load();
             RemoveAppointmentController controller = loader.getController();
+
+            controller.setArrayClientsName(appointments);
+
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Remove Appointment");
@@ -223,7 +230,7 @@ public class OverviewController {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                removeUsualClient(controller.getClient());
+                removeAppointment(controller.getAppointment());
             }
 
         } catch (IOException e) {
