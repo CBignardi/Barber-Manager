@@ -57,9 +57,7 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" +
-                "client=" + client.toString() +
-                ", date=" + date.toString() +
-                '}';
+        return date.format(DateTimeFormatter.ofPattern("HH:mm")) + " -> "
+                + client.toString();
     }
 }

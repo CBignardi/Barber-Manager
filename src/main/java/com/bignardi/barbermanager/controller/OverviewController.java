@@ -1,9 +1,13 @@
 package com.bignardi.barbermanager.controller;
 
+import com.bignardi.barbermanager.App;
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -13,6 +17,7 @@ import javafx.stage.Modality;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,29 +25,13 @@ import java.util.Optional;
 
 public class OverviewController {
     @FXML
-    private TableView<Appointment> firstDayTable;
+    private ListView<Appointment> firstListView;
     @FXML
-    private TableView<Appointment> secondDayTable;
+    private ListView<Appointment> secondListView;
     @FXML
-    private TableView<Appointment> thirdDayTable;
+    private ListView<Appointment> thirdListView;
     @FXML
-    private TableView<Appointment> fourthDayTable;
-    @FXML
-    private TableColumn<Client, String> firstDayNameColumn;
-    @FXML
-    private TableColumn<Appointment, String> firstDayHourColumn;
-    @FXML
-    private TableColumn<Client, String> secondDayNameColumn;
-    @FXML
-    private TableColumn<Appointment, String> secondDayHourColumn;
-    @FXML
-    private TableColumn<Client, String> thirdDayNameColumn;
-    @FXML
-    private TableColumn<Appointment, String> thirdDayHourColumn;
-    @FXML
-    private TableColumn<Client, String> fourthDayNameColumn;
-    @FXML
-    private TableColumn<Appointment, String> fourthDayHourColumn;
+    private ListView<Appointment> fourthListView;
     @FXML
     private Label textFirstDay;
     @FXML
@@ -56,32 +45,41 @@ public class OverviewController {
     private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static ArrayList<Client> usualClients = new ArrayList<>();
     private LocalDate dayView;
-    private ArrayList<TableView<Appointment>> tableViews;
+    private ArrayList<ListView<Appointment>> listViews;
     private ArrayList<Label> labels;
+    @FXML
+    private ListView<Appointment> listView;
+    private Appointment prova = new Appointment();
 
     @FXML
     public void initialize() {
         appointments = new ArrayList<>();
         usualClients = new ArrayList<>();
-        firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
-        secondDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        secondDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
-        thirdDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        thirdDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
-        fourthDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        fourthDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
 
-        tableViews = new ArrayList<>(4);
+        listViews = new ArrayList<>(4);
         labels = new ArrayList<>(4);
-        tableViews.add(firstDayTable);
-        tableViews.add(secondDayTable);
-        tableViews.add(thirdDayTable);
-        tableViews.add(fourthDayTable);
+        listViews.add(firstListView);
+        listViews.add(secondListView);
+        listViews.add(thirdListView);
+        listViews.add(fourthListView);
         labels.add(textFirstDay);
         labels.add(textSecondDay);
         labels.add(textThirdDay);
         labels.add(textFourthDay);
+
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 2, 15, 10)));
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 3, 15, 10)));
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 4, 15, 10)));
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 5, 15, 10)));
+        /*
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
+            @Override
+            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
+                prova = listView.getSelectionModel().getSelectedItem();
+                System.out.println(prova.toString());
+            }
+        });
+         */
 
         if (!appointments.isEmpty()) {
             dayView = appointments.getFirst().getDate().toLocalDate();
@@ -91,6 +89,7 @@ public class OverviewController {
 
         updateTables();
     }
+
 
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
@@ -119,19 +118,17 @@ public class OverviewController {
     }
 
     public void updateTables() {
-        ObservableList<Appointment> subAppointments;
         LocalDate day = dayView;
-        for (int i = 0; i < 4; i++) {
-            subAppointments = getSubAppointments(day);
-            tableViews.get(i).setItems(subAppointments);
 
+        for (int i = 0; i < 4; i++) {
+            listViews.get(i).getItems().addAll(getSubAppointments(day));
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
         }
     }
 
-    private ObservableList<Appointment> getSubAppointments(LocalDate Day) {
-        ObservableList<Appointment> subAppointments = FXCollections.observableArrayList();
+    private ArrayList<Appointment> getSubAppointments(LocalDate Day) {
+        ArrayList<Appointment> subAppointments = new ArrayList<>();
         for (Appointment appointment : appointments) {
             if (appointment.getDate().toLocalDate().equals(Day)) {
                 subAppointments.add(appointment);
@@ -147,22 +144,6 @@ public class OverviewController {
         alert.setContentText(explanation);
         alert.showAndWait();
     }
-
-    /* da correggere apointment in client
-    ObservableList<Appointment> getClientData() {
-        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-        try {
-            appointments.add(new Appointment("Christian", 2024, 4, 24, 15, 5));
-            appointments.add(new Appointment("Alfonso", 2024, 4, 24, 16, 15));
-            appointments.add(new Appointment("Giovanni", 2024, 4, 24, 16, 45));
-            appointments.add(new Appointment("Luca", 2024, 4, 24, 14, 0));
-        } catch (IllegalArgumentException e) {
-            showWrongDateAlert();
-        }
-        return appointments;
-    }
-    */
-
 
     @FXML
     public void handleNewCustomer() {
