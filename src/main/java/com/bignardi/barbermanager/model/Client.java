@@ -6,7 +6,8 @@ public class Client {
     private String name;
     private int duration;
 
-    public Client(String name, int duration) {
+    public Client(String name, int duration)
+    {
         this.name = name;
         this.duration = duration;
     }

@@ -138,11 +138,11 @@ public class OverviewController {
         return subAppointments;
     }
 
-    void showWrongDateAlert() {
+    void showAlert(String title, String explanation) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Alert");
-        alert.setHeaderText("Wrong date");
-        alert.setContentText("Please insert a correct date, you put a date that doesn't exist!");
+        alert.setHeaderText(title);
+        alert.setContentText(explanation);
         alert.showAndWait();
     }
 
@@ -180,6 +180,8 @@ public class OverviewController {
                 addUsualClient(controller.getUsualClient());
             }
 
+        } catch (NumberFormatException | NullPointerException e) {
+            showAlert("Wrong Client value", "You put a wrong value of name or duration, please insert a correct value");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -203,7 +205,6 @@ public class OverviewController {
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 addAppointment(controller.getAppointment());
-                System.out.println("ho aggiunto");
             }
 
         } catch (IOException e) {

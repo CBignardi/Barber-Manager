@@ -22,13 +22,11 @@ public class NewCustomerController {
         durationField.textProperty().addListener((observable, oldValue, newValue) -> duration = newValue);
     }
 
-    public Client getUsualClient() {
-        try {
-            return new Client(name, Integer.parseInt(duration));
-        } catch (NumberFormatException e) {
-            showWrongDurationAlert();
-            return null;
+    public Client getUsualClient() throws NumberFormatException {
+        if(name == null || duration == null){
+            throw new NullPointerException();
         }
+        return new Client(name, Integer.parseInt(duration));
     }
 
     void showWrongDurationAlert() {
