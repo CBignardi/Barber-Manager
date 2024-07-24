@@ -1,17 +1,10 @@
 package com.bignardi.barbermanager.controller;
 
-import com.bignardi.barbermanager.App;
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 
 import java.io.IOException;
@@ -80,17 +73,16 @@ public class OverviewController {
         updateTables();
     }
 
-    public void EXEMPLE(){
+    public void EXEMPLE() {
         dayView = LocalDate.of(2024, 2, 2);
         addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 2, 15, 10)));
         addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 3, 15, 10)));
         addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 4, 15, 10)));
         addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 5, 15, 10)));
-        for(Appointment a : appointments){
+        for (Appointment a : appointments) {
             System.out.println(a.toStringFull());
         }
         updateTables();
-
     }
 
 
@@ -101,7 +93,6 @@ public class OverviewController {
 
     public void removeAppointment(Appointment appointment) {
         appointments.remove(appointment);
-        updateTables();
     }
 
     public void addUsualClient(Client usualClient) {
@@ -115,9 +106,6 @@ public class OverviewController {
         usualClients.remove(usualClient);
     }
 
-    public static ArrayList<Client> getArrayUsualClient() {
-        return usualClients;
-    }
 
     public void updateTables() {
         LocalDate day = dayView;
@@ -132,12 +120,6 @@ public class OverviewController {
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
         }
-    }
-
-    private ArrayList<Appointment> getSubAppointments(LocalDate day) {
-        ArrayList<Appointment> subAppointments = new ArrayList<>();
-
-        return subAppointments;
     }
 
     void showAlert(String title, String explanation) {
