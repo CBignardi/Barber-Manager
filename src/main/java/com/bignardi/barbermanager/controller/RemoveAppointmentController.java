@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class RemoveAppointmentController {
     @FXML
     private ChoiceBox<String> choiceBoxName;
-    private ArrayList<String> arrayClientsName;
+    private ArrayList<String> arrayClientsName = new ArrayList<>();
+    private ArrayList<String> arrayDate = new ArrayList<>();
     private Appointment appointment;
 
     @FXML

@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -121,14 +122,15 @@ public class OverviewController {
         ObservableList<Appointment> subAppointments;
         LocalDate day = dayView;
         for (int i = 0; i < 4; i++) {
-            subAppointments = getSubClients(day);
+            subAppointments = getSubAppointments(day);
             tableViews.get(i).setItems(subAppointments);
+
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
         }
     }
 
-    private ObservableList<Appointment> getSubClients(LocalDate Day) {
+    private ObservableList<Appointment> getSubAppointments(LocalDate Day) {
         ObservableList<Appointment> subAppointments = FXCollections.observableArrayList();
         for (Appointment appointment : appointments) {
             if (appointment.getDate().toLocalDate().equals(Day)) {
@@ -180,8 +182,10 @@ public class OverviewController {
                 addUsualClient(controller.getUsualClient());
             }
 
-        } catch (NumberFormatException | NullPointerException e) {
-            showAlert("Wrong Client value", "You put a wrong value of name or duration, please insert a correct value");
+        } catch (NullPointerException e) {
+            showAlert("Wrong Customer value", "All the field has to be filled, please insert a correct value in each field.");
+        } catch (NumberFormatException e) {
+            showAlert("Wrong Customer value", "The duration value is wrong, please insert a correct duration.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -206,7 +210,12 @@ public class OverviewController {
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 addAppointment(controller.getAppointment());
             }
-
+        } catch (NullPointerException e) {
+            showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
+        } catch (DateTimeException e) {
+            showAlert("Wrong Appointment value", "The date value is wrong, please insert a correct date. The correct form is: hour minute (example: 15 35).");
+        } catch (NumberFormatException e) {
+            showAlert("Wrong Appointment value", "The duration value is wrong, please insert a correct duration.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -221,7 +230,6 @@ public class OverviewController {
             RemoveAppointmentController controller = loader.getController();
 
             controller.setArrayClientsName(appointments);
-
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Remove Appointment");

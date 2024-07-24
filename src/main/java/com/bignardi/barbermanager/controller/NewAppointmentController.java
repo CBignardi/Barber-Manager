@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -27,17 +28,20 @@ public class NewAppointmentController {
     private ChoiceBox choiceBox;
 
     private String name;
-    private int duration;
+    private String duration;
     private String timeAppointment;
     private LocalDate date;
     private LocalDateTime localDateTime;
     private ArrayList<String> arrayClientsName = new ArrayList<>();
     private ArrayList<Client> arrayClients;
 
-    public Appointment getAppointment() {
+    public Appointment getAppointment() throws DateTimeException, NumberFormatException {
+        if (timeAppointment == null || date == null || name == null || duration == null) {
+            throw new NullPointerException();
+        }
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
         localDateTime = LocalDateTime.of(date, localTime);
-        Client client = new Client(name, duration);
+        Client client = new Client(name, Integer.parseInt(duration));
         return new Appointment(client, localDateTime);
     }
 
@@ -62,7 +66,7 @@ public class NewAppointmentController {
     @FXML
     public void initialize() {
         nameField.textProperty().addListener((observable, oldValue, newValue) -> name = newValue);
-        durationField.textProperty().addListener((observable, oldValue, newValue) -> duration = Integer.parseInt(newValue));
+        durationField.textProperty().addListener((observable, oldValue, newValue) -> duration = newValue);
         timeField.textProperty().addListener((observable, oldValue, newValue) -> timeAppointment = newValue);
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> date = newValue);
     }
