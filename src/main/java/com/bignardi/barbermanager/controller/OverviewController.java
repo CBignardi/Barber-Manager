@@ -63,13 +63,13 @@ public class OverviewController {
         appointments = new ArrayList<>();
         usualClients = new ArrayList<>();
         firstDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
+        firstDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
         secondDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        secondDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
+        secondDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
         thirdDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        thirdDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
+        thirdDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
         fourthDayNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        fourthDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("stringHourMin"));
+        fourthDayHourColumn.setCellValueFactory(new PropertyValueFactory<>("timeString"));
 
         tableViews = new ArrayList<>(4);
         labels = new ArrayList<>(4);
@@ -94,7 +94,6 @@ public class OverviewController {
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
         appointments.sort(Comparator.comparing(Appointment::getDate));
-        //System.out.println("Cliente: " + appointment.toString());
         updateTables();
     }
 
@@ -104,16 +103,17 @@ public class OverviewController {
     }
 
     public void addUsualClient(Client usualClient) {
-        usualClients.add(usualClient);
-        System.out.println("usual client: " + usualClients.toString());
-        usualClients.sort(Comparator.comparing(Client::getName));
+        if (usualClient != null) {
+            usualClients.add(usualClient);
+            usualClients.sort(Comparator.comparing(Client::getName));
+        }
     }
 
     public void removeUsualClient(Client usualClient) {
         usualClients.remove(usualClient);
     }
 
-    public static ArrayList<Client> getArrayUsualClient(){
+    public static ArrayList<Client> getArrayUsualClient() {
         return usualClients;
     }
 
@@ -178,7 +178,6 @@ public class OverviewController {
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 addUsualClient(controller.getUsualClient());
-                System.out.println("get client");
             }
 
         } catch (IOException e) {

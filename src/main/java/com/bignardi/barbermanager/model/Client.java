@@ -1,5 +1,7 @@
 package com.bignardi.barbermanager.model;
 
+import java.util.Objects;
+
 public class Client {
     private String name;
     private int duration;
