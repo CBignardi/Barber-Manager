@@ -60,4 +60,7 @@ public class Appointment {
         return date.format(DateTimeFormatter.ofPattern("HH:mm")) + " -> "
                 + client.toString();
     }
+    public String toStringFull(){
+        return client.toString() + " " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
 }

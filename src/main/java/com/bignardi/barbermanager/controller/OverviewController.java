@@ -47,9 +47,7 @@ public class OverviewController {
     private LocalDate dayView;
     private ArrayList<ListView<Appointment>> listViews;
     private ArrayList<Label> labels;
-    @FXML
-    private ListView<Appointment> listView;
-    private Appointment prova = new Appointment();
+
 
     @FXML
     public void initialize() {
@@ -67,10 +65,6 @@ public class OverviewController {
         labels.add(textThirdDay);
         labels.add(textFourthDay);
 
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 2, 15, 10)));
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 3, 15, 10)));
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 4, 15, 10)));
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 5, 15, 10)));
         /*
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
             @Override
@@ -81,20 +75,28 @@ public class OverviewController {
         });
          */
 
-        if (!appointments.isEmpty()) {
-            dayView = appointments.getFirst().getDate().toLocalDate();
-        } else {
-            dayView = LocalDate.now();
-        }
+        EXEMPLE();
 
         updateTables();
+    }
+
+    public void EXEMPLE(){
+        dayView = LocalDate.of(2024, 2, 2);
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 2, 15, 10)));
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 3, 15, 10)));
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 4, 15, 10)));
+        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 5, 15, 10)));
+        for(Appointment a : appointments){
+            System.out.println(a.toStringFull());
+        }
+        updateTables();
+
     }
 
 
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
         appointments.sort(Comparator.comparing(Appointment::getDate));
-        updateTables();
     }
 
     public void removeAppointment(Appointment appointment) {
@@ -121,19 +123,20 @@ public class OverviewController {
         LocalDate day = dayView;
 
         for (int i = 0; i < 4; i++) {
-            listViews.get(i).getItems().addAll(getSubAppointments(day));
+            listViews.get(i).getItems().clear();
+            for (Appointment appointment : appointments) {
+                if (appointment.getDate().toLocalDate().equals(day)) {
+                    listViews.get(i).getItems().add(appointment);
+                }
+            }
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
         }
     }
 
-    private ArrayList<Appointment> getSubAppointments(LocalDate Day) {
+    private ArrayList<Appointment> getSubAppointments(LocalDate day) {
         ArrayList<Appointment> subAppointments = new ArrayList<>();
-        for (Appointment appointment : appointments) {
-            if (appointment.getDate().toLocalDate().equals(Day)) {
-                subAppointments.add(appointment);
-            }
-        }
+
         return subAppointments;
     }
 
