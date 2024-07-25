@@ -2,6 +2,10 @@ package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -40,6 +44,11 @@ public class OverviewController {
     private LocalDate dayView;
     private ArrayList<ListView<Appointment>> listViews;
     private ArrayList<Label> labels;
+    private Appointment firstSelectedItem;
+    private Appointment secondSelectedItem;
+    private Appointment thirdSelectedItem;
+    private Appointment fourthSelectedItem;
+    private int index;
 
 
     @FXML
@@ -58,15 +67,38 @@ public class OverviewController {
         labels.add(textThirdDay);
         labels.add(textFourthDay);
 
-        /*
-        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
+        firstListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
             @Override
             public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
-                prova = listView.getSelectionModel().getSelectedItem();
-                System.out.println(prova.toString());
+                firstSelectedItem = firstListView.getSelectionModel().getSelectedItem();
+                System.out.println(firstSelectedItem.toString());
+
             }
         });
-         */
+
+        secondListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
+            @Override
+            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
+                secondSelectedItem = secondListView.getSelectionModel().getSelectedItem();
+                System.out.println(secondSelectedItem.toString());
+            }
+        });
+        secondListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        thirdListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
+            @Override
+            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
+                thirdSelectedItem = thirdListView.getSelectionModel().getSelectedItem();
+                System.out.println(thirdSelectedItem.toString());
+
+            }
+        });
+        fourthListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
+            @Override
+            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
+                fourthSelectedItem = fourthListView.getSelectionModel().getSelectedItem();
+                System.out.println(fourthSelectedItem.toString());
+            }
+        });
 
         EXEMPLE();
 
@@ -111,15 +143,20 @@ public class OverviewController {
         LocalDate day = dayView;
 
         for (int i = 0; i < 4; i++) {
-            listViews.get(i).getItems().clear();
-            for (Appointment appointment : appointments) {
-                if (appointment.getDate().toLocalDate().equals(day)) {
-                    listViews.get(i).getItems().add(appointment);
-                }
-            }
+            listViews.get(i).setItems(getSubListAppointment(day));
             labels.get(i).setText(day.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             day = day.plusDays(1);
         }
+    }
+
+    private ObservableList<Appointment> getSubListAppointment(LocalDate day){
+        ObservableList<Appointment> subAppointments = FXCollections.observableArrayList();
+        for (Appointment appointment : appointments) {
+            if (appointment.getDate().toLocalDate().equals(day)) {
+                subAppointments.add(appointment);
+            }
+        }
+        return subAppointments;
     }
 
     void showAlert(String title, String explanation) {

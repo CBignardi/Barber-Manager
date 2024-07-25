@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="All correct">
+    <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/controller/OverviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bignardi/barbermanager/model/Appointment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +120,9 @@
       <workItem from="1721719308494" duration="4795000" />
       <workItem from="1721737933884" duration="6718000" />
       <workItem from="1721805949732" duration="5555000" />
-      <workItem from="1721823987791" duration="7768000" />
+      <workItem from="1721823987791" duration="8389000" />
+      <workItem from="1721892515988" duration="2370000" />
+      <workItem from="1721894906568" duration="2393000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -299,7 +300,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721832465766</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Update">
+      <option name="closed" value="true" />
+      <created>1721834387502</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1721834387502</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Update">
+      <option name="closed" value="true" />
+      <created>1721834727060</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1721834727060</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,10 +336,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Scene Builder" />
     <MESSAGE value="Before changing the structure" />
-    <MESSAGE value="Update" />
     <MESSAGE value="Before change the table to list" />
     <MESSAGE value="All correct" />
-    <option name="LAST_COMMIT_MESSAGE" value="All correct" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
