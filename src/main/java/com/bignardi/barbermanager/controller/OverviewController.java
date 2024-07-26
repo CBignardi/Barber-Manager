@@ -231,27 +231,29 @@ public class OverviewController {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("Select a directory");
             directoryChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
-            File directory = directoryChooser.showDialog(null);
+            File startDirectory = directoryChooser.showDialog(null);
             if(directory != null){
-                File fileAppointment = new File(directory.toURI());
 
+                File fileAppointment = new File(directory.getAbsolutePath() + "/Appointment.json");
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                mapper.writerWithDefaultPrettyPrinter().writeValue(fileAppointment, appointments);
             }
-
+/*
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
             fileChooser.getExtensionFilters().add(extFilter);
 
             File fileAppointment = fileChooser.showSaveDialog(null);
-            fileAppointment = fileChooser.
             if (fileAppointment != null) {
-                File fileUsualClient = fileAppointment.
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
                 mapper.writerWithDefaultPrettyPrinter().writeValue(fileAppointment, appointments);
-                mapper.writerWithDefaultPrettyPrinter().writeValue();
             }
+
+ */
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Could not save data").showAndWait();
+            showAlert("Save failed",null);
         }
     }
 
