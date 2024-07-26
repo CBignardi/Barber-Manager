@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 public class OverviewController {
@@ -49,7 +51,7 @@ public class OverviewController {
     @FXML
     private DatePicker goToDay;
     private static ArrayList<Appointment> appointments = new ArrayList<>();
-    private static final ArrayList<Client> usualClients = new ArrayList<>();
+    private static ArrayList<Client> usualClients = new ArrayList<>();
     private LocalDate dayView;
     final int numberOfTables = 4;
     private final ArrayList<ListView<Appointment>> listViews = new ArrayList<>(numberOfTables);
@@ -68,7 +70,7 @@ public class OverviewController {
         labels.add(textThirdDay);
         labels.add(textFourthDay);
 
-        for(ListView<Appointment> listView : listViews){
+        for (ListView<Appointment> listView : listViews) {
             listView.getSelectionModel().selectedItemProperty().addListener(this::changed);
             listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
@@ -83,14 +85,14 @@ public class OverviewController {
 
     public void EXAMPLE() {
         dayView = LocalDate.now();
-        Client c =new Client("chri", 30);
+        Client c = new Client("chri", 30);
         addUsualClient(c);
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16 ,0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16 ,0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(15 ,0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(14 ,0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(14 ,0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(3), LocalTime.of(14 ,0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(14, 0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(14, 0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(3), LocalTime.of(14, 0))));
         /*
         for (Appointment a : appointments) {
             System.out.println(a.toStringFull());
@@ -207,65 +209,64 @@ public class OverviewController {
     private void handleOpen() {
         try {
             FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select two file .json");
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
             fileChooser.getExtensionFilters().add(extFilter);
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
 
-            File file = fileChooser.showOpenDialog(null);
+            List<File> files = fileChooser.showOpenMultipleDialog(null);
 
-            if (file != null) {
+            if (files.size() == 2) {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
-                appointments = mapper.readValue(file, new TypeReference<>() {
-                });
+                for (File file : files) {
+                    System.out.println(file.getName());
+                    if (file.getName().equals("Appointments.json")) {
+                        appointments = mapper.readValue(file, new TypeReference<>() {
+                        });
+                    } else {
+
+                        usualClients = mapper.
+                            usualClients = mapper.readValue(file, new TypeReference<>() {
+                        });
+                    }
+                }
+            } else {
+                throw new FileNotFoundException();
             }
+        }catch (FileNotFoundException e){
+            showAlert("Open failed", "Wrong file selected, please select two files called: \"Appointments.json\" and \"UsualClients.json\".");
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();
+            showAlert("Open failed", null);
         }
-
-
     }
 
     @FXML
-    private void handleSaveAs() {
+    private void handleSave() {
         try {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("Select a directory");
             directoryChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
-            File startDirectory = directoryChooser.showDialog(null);
-            if(directory != null){
+            File directory = directoryChooser.showDialog(null);
+            if (directory != null) {
 
-                File fileAppointment = new File(directory.getAbsolutePath() + "/Appointment.json");
+                File fileAppointment = new File(directory.getAbsolutePath() + "/Appointments.json");
+                File fileClient = new File(directory.getAbsolutePath() + "/UsualClients.json");
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
                 mapper.writerWithDefaultPrettyPrinter().writeValue(fileAppointment, appointments);
+                mapper.writerWithDefaultPrettyPrinter().writeValue(fileClient, usualClients);
             }
-/*
-            FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
-            fileChooser.getExtensionFilters().add(extFilter);
-
-            File fileAppointment = fileChooser.showSaveDialog(null);
-            if (fileAppointment != null) {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.registerModule(new JavaTimeModule());
-                mapper.writerWithDefaultPrettyPrinter().writeValue(fileAppointment, appointments);
-            }
-
- */
         } catch (IOException e) {
-            showAlert("Save failed",null);
+            showAlert("Save failed", null);
         }
     }
 
     @FXML
-    public void handleSave(){
-
-    }
-
-    @FXML
-    public void handleNew(){
+    public void handleNew() {
         appointments.clear();
         usualClients.clear();
+        updateTables();
     }
 
     @FXML
@@ -305,8 +306,8 @@ public class OverviewController {
     }
 
     @FXML
-    public void clearSelectedItems(){
-        for (ListView<Appointment> listView : listViews){
+    public void clearSelectedItems() {
+        for (ListView<Appointment> listView : listViews) {
             listView.getSelectionModel().clearSelection();
         }
     }
