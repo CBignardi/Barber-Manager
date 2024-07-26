@@ -2,14 +2,23 @@ package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -39,7 +48,7 @@ public class OverviewController {
     private Label textFourthDay;
     @FXML
     private DatePicker goToDay;
-    private static final ArrayList<Appointment> appointments = new ArrayList<>();
+    private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static final ArrayList<Client> usualClients = new ArrayList<>();
     private LocalDate dayView;
     final int numberOfTables = 4;
@@ -82,9 +91,11 @@ public class OverviewController {
         addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(14 ,0))));
         addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(14 ,0))));
         addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(3), LocalTime.of(14 ,0))));
+        /*
         for (Appointment a : appointments) {
             System.out.println(a.toStringFull());
         }
+        */
         updateTables();
     }
 
@@ -190,6 +201,69 @@ public class OverviewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleOpen() {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            File file = fileChooser.showOpenDialog(null);
+
+            if (file != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                appointments = mapper.readValue(file, new TypeReference<>() {
+                });
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not load data").showAndWait();
+        }
+
+
+    }
+
+    @FXML
+    private void handleSaveAs() {
+        try {
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Select a directory");
+            directoryChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
+            File directory = directoryChooser.showDialog(null);
+            if(directory != null){
+                File fileAppointment = new File(directory.toURI());
+
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            File fileAppointment = fileChooser.showSaveDialog(null);
+            fileAppointment = fileChooser.
+            if (fileAppointment != null) {
+                File fileUsualClient = fileAppointment.
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                mapper.writerWithDefaultPrettyPrinter().writeValue(fileAppointment, appointments);
+                mapper.writerWithDefaultPrettyPrinter().writeValue();
+            }
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Could not save data").showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleSave(){
+
+    }
+
+    @FXML
+    public void handleNew(){
+        appointments.clear();
+        usualClients.clear();
     }
 
     @FXML
