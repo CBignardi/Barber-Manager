@@ -27,7 +27,7 @@
                         <MenuItem mnemonicParsing="false" text="Save" />
                         <MenuItem mnemonicParsing="false" text="Save backup" />
                         <MenuItem mnemonicParsing="false" text="Load backup" />
-                        <MenuItem mnemonicParsing="false" text="Reload" />
+                        <MenuItem mnemonicParsing="false" onAction="#updateTables" text="Reload" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -42,8 +42,13 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <SplitPane dividerPositions="0.7" prefHeight="42.0">
+            <SplitPane dividerPositions="0.21, 0.73" prefHeight="42.0">
                <items>
+                  <HBox alignment="CENTER" prefWidth="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#clearSelectedItems" prefHeight="27.0" text="Clear selected items" />
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" spacing="8.0">
                      <children>
                         <Label text="Manage an appointment:">
@@ -52,7 +57,7 @@
                            </font>
                         </Label>
                         <Button mnemonicParsing="false" onAction="#handleNewAppointment" prefHeight="27.0" prefWidth="45.0" text="New" />
-                        <Button mnemonicParsing="false" onAction="#handleRemoveAppointment" prefHeight="27.0" text="Remove" />
+                        <Button mnemonicParsing="false" onAction="#removeAppointment" prefHeight="27.0" text="Remove" />
                      </children>
                      <padding>
                         <Insets left="15.0" />

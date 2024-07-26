@@ -41,8 +41,20 @@ public class NewAppointmentController {
         }
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
         localDateTime = LocalDateTime.of(date, localTime);
-        Client client = new Client(name, Integer.parseInt(duration));
+        Client client = containsClient(name, Integer.parseInt(duration));
+        if(client == null){
+            client = new Client(name, Integer.parseInt(duration));
+        }
         return new Appointment(client, localDateTime);
+    }
+
+    private Client containsClient(String name, int duration){
+        for(Client client : arrayClients){
+            if(client.getName().equals(name) && client.getDuration() == duration){
+                return  client;
+            }
+        }
+        return null;
     }
 
     public void setArrayClientsName(ArrayList<Client> clients) {

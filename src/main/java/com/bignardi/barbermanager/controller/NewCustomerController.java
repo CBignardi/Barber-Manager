@@ -28,12 +28,4 @@ public class NewCustomerController {
         }
         return new Client(name, Integer.parseInt(duration));
     }
-
-    void showWrongDurationAlert() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Alert");
-        alert.setHeaderText("Wrong duration");
-        alert.setContentText("Please insert a number in the duration field, you put something that isn't a number!");
-        alert.showAndWait();
-    }
 }

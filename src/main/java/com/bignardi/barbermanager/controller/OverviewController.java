@@ -2,7 +2,6 @@ package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -39,25 +39,17 @@ public class OverviewController {
     private Label textFourthDay;
     @FXML
     private DatePicker goToDay;
-    private static ArrayList<Appointment> appointments = new ArrayList<>();
-    private static ArrayList<Client> usualClients = new ArrayList<>();
+    private static final ArrayList<Appointment> appointments = new ArrayList<>();
+    private static final ArrayList<Client> usualClients = new ArrayList<>();
     private LocalDate dayView;
-    private ArrayList<ListView<Appointment>> listViews;
-    private ArrayList<Label> labels;
-    private Appointment firstSelectedItem;
-    private Appointment secondSelectedItem;
-    private Appointment thirdSelectedItem;
-    private Appointment fourthSelectedItem;
-    private int index;
+    final int numberOfTables = 4;
+    private final ArrayList<ListView<Appointment>> listViews = new ArrayList<>(numberOfTables);
+    private final ArrayList<Label> labels = new ArrayList<>(numberOfTables);
+    private Appointment selectedItem;
 
 
     @FXML
     public void initialize() {
-        appointments = new ArrayList<>();
-        usualClients = new ArrayList<>();
-
-        listViews = new ArrayList<>(4);
-        labels = new ArrayList<>(4);
         listViews.add(firstListView);
         listViews.add(secondListView);
         listViews.add(thirdListView);
@@ -67,50 +59,29 @@ public class OverviewController {
         labels.add(textThirdDay);
         labels.add(textFourthDay);
 
-        firstListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
-            @Override
-            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
-                firstSelectedItem = firstListView.getSelectionModel().getSelectedItem();
-                System.out.println(firstSelectedItem.toString());
+        for(ListView<Appointment> listView : listViews){
+            listView.getSelectionModel().selectedItemProperty().addListener(this::changed);
+            listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        }
 
-            }
-        });
-
-        secondListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
-            @Override
-            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
-                secondSelectedItem = secondListView.getSelectionModel().getSelectedItem();
-                System.out.println(secondSelectedItem.toString());
-            }
-        });
-        secondListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        thirdListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
-            @Override
-            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
-                thirdSelectedItem = thirdListView.getSelectionModel().getSelectedItem();
-                System.out.println(thirdSelectedItem.toString());
-
-            }
-        });
-        fourthListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appointment>() {
-            @Override
-            public void changed(ObservableValue<? extends Appointment> observableValue, Appointment appointment, Appointment t1) {
-                fourthSelectedItem = fourthListView.getSelectionModel().getSelectedItem();
-                System.out.println(fourthSelectedItem.toString());
-            }
-        });
-
-        EXEMPLE();
-
+        EXAMPLE();
         updateTables();
     }
 
-    public void EXEMPLE() {
-        dayView = LocalDate.of(2024, 2, 2);
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 2, 15, 10)));
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 3, 15, 10)));
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 4, 15, 10)));
-        addAppointment(new Appointment(new Client("chri", 30), LocalDateTime.of(2024, 2, 5, 15, 10)));
+    private void changed(ObservableValue<? extends Appointment> observable, Appointment oldValue, Appointment newValue) {
+        selectedItem = newValue;
+    }
+
+    public void EXAMPLE() {
+        dayView = LocalDate.now();
+        Client c =new Client("chri", 30);
+        addUsualClient(c);
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16 ,0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16 ,0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(15 ,0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(14 ,0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(14 ,0))));
+        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(3), LocalTime.of(14 ,0))));
         for (Appointment a : appointments) {
             System.out.println(a.toStringFull());
         }
@@ -123,8 +94,9 @@ public class OverviewController {
         appointments.sort(Comparator.comparing(Appointment::getDate));
     }
 
-    public void removeAppointment(Appointment appointment) {
-        appointments.remove(appointment);
+    public void removeAppointment() {
+        appointments.remove(selectedItem);
+        updateTables();
     }
 
     public void addUsualClient(Client usualClient) {
@@ -133,11 +105,6 @@ public class OverviewController {
             usualClients.sort(Comparator.comparing(Client::getName));
         }
     }
-
-    public void removeUsualClient(Client usualClient) {
-        usualClients.remove(usualClient);
-    }
-
 
     public void updateTables() {
         LocalDate day = dayView;
@@ -149,7 +116,7 @@ public class OverviewController {
         }
     }
 
-    private ObservableList<Appointment> getSubListAppointment(LocalDate day){
+    private ObservableList<Appointment> getSubListAppointment(LocalDate day) {
         ObservableList<Appointment> subAppointments = FXCollections.observableArrayList();
         for (Appointment appointment : appointments) {
             if (appointment.getDate().toLocalDate().equals(day)) {
@@ -212,6 +179,7 @@ public class OverviewController {
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 addAppointment(controller.getAppointment());
+                updateTables();
             }
         } catch (NullPointerException e) {
             showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
@@ -219,31 +187,6 @@ public class OverviewController {
             showAlert("Wrong Appointment value", "The date value is wrong, please insert a correct date. The correct form is: hour minute (example: 15 35).");
         } catch (NumberFormatException e) {
             showAlert("Wrong Appointment value", "The duration value is wrong, please insert a correct duration.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void handleRemoveAppointment() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("removeappointment-view.fxml"));
-            DialogPane view = loader.load();
-            RemoveAppointmentController controller = loader.getController();
-
-            controller.setArrayClientsName(appointments);
-
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setTitle("Remove Appointment");
-            dialog.initModality(Modality.WINDOW_MODAL);
-            dialog.setDialogPane(view);
-
-            Optional<ButtonType> clickedButton = dialog.showAndWait();
-            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                removeAppointment(controller.getAppointment());
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -283,5 +226,12 @@ public class OverviewController {
     public void setGoToDay() {
         dayView = goToDay.getValue();
         updateTables();
+    }
+
+    @FXML
+    public void clearSelectedItems(){
+        for (ListView<Appointment> listView : listViews){
+            listView.getSelectionModel().clearSelection();
+        }
     }
 }
