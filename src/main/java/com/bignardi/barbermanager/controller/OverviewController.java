@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class OverviewController {
     @FXML
@@ -72,7 +73,6 @@ public class OverviewController {
             listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
 
-        //EXAMPLE();
         updateTables();
     }
 
@@ -80,40 +80,40 @@ public class OverviewController {
         selectedItem = newValue;
     }
 
-    public void EXAMPLE() {
-        dayView = LocalDate.now();
-        Client c = new Client("chri", 30);
-        addUsualClient(c);
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(16, 0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.of(14, 0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(2), LocalTime.of(14, 0))));
-        addAppointment(new Appointment(c, LocalDateTime.of(LocalDate.now().plusDays(3), LocalTime.of(14, 0))));
-        /*
-        for (Appointment a : appointments) {
-            System.out.println(a.toStringFull());
-        }
-        */
-        updateTables();
-    }
-
-
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
+        addUsualClient(appointment.getClient());
         appointments.sort(Comparator.comparing(Appointment::getDate));
     }
 
     public void removeAppointment() {
-        appointments.remove(selectedItem);
-        updateTables();
+        if (selectedItem != null) {
+            appointments.remove(selectedItem);
+            removeUsualClient();
+            updateTables();
+        }
+    }
+
+    public void removeUsualClient() {
+        usualClients.remove(selectedItem.getClient());
     }
 
     public void addUsualClient(Client usualClient) {
         if (usualClient != null) {
-            usualClients.add(usualClient);
-            usualClients.sort(Comparator.comparing(Client::getName));
+            if (!containsUsualClient(usualClient)) {
+                usualClients.add(usualClient);
+                usualClients.sort(Comparator.comparing(Client::getName));
+            }
         }
+    }
+
+    private boolean containsUsualClient(Client usualClient) {
+        for (Client client : usualClients) {
+            if (usualClient.getName().equals(client.getName()) && usualClient.getDuration() == client.getDuration()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateTables() {
@@ -191,8 +191,8 @@ public class OverviewController {
                 addAppointment(controller.getAppointment());
                 updateTables();
             }
-        //} catch (NullPointerException e) {
-            //showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
+        } catch (NullPointerException e) {
+            showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
         } catch (DateTimeException e) {
             showAlert("Wrong Appointment value", "The date value is wrong, please insert a correct date. The correct form is: hour minute (example: 15 35).");
         } catch (NumberFormatException e) {
@@ -242,7 +242,6 @@ public class OverviewController {
             directoryChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
             File directory = directoryChooser.showDialog(null);
             if (directory != null) {
-
                 File fileAppointment = new File(directory.getAbsolutePath() + "/Appointments.json");
                 File fileClient = new File(directory.getAbsolutePath() + "/UsualClients.json");
                 ObjectMapper mapper = new ObjectMapper();

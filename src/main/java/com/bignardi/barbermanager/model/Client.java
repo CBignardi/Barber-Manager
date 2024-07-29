@@ -4,13 +4,14 @@ public class Client {
     private String name;
     private int duration;
 
-    public Client(){
+    public Client() {
     }
 
-    public Client(String name, int duration)
-    {
-        this.name = name;
-        this.duration = duration;
+    public Client(String name, int duration) {
+        if (name != null && duration > 0) {
+            this.name = name;
+            this.duration = duration;
+        }
     }
 
     public String getName() {
@@ -18,7 +19,9 @@ public class Client {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null) {
+            this.name = name;
+        }
     }
 
     public int getDuration() {
@@ -26,11 +29,17 @@ public class Client {
     }
 
     public void setDuration(int duration) {
-        this.duration = duration;
+        if (duration > 0) {
+            this.duration = duration;
+        }
     }
 
     @Override
     public String toString() {
         return name;
+    }
+
+    public String toStringFull() {
+        return name + " " + duration;
     }
 }

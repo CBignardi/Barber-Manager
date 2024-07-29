@@ -2,6 +2,8 @@ package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -31,51 +33,21 @@ public class NewAppointmentController {
     private String duration;
     private String timeAppointment;
     private LocalDate date;
-    private LocalDateTime localDateTime;
-    private ArrayList<String> arrayClientsName = new ArrayList<>();
+    private final ObservableList<String> arrayClientsName = FXCollections.observableArrayList();
     private ArrayList<Client> arrayClients = new ArrayList<>();
 
     public Appointment getAppointment() throws DateTimeException, NumberFormatException {
-        System.out.println(timeAppointment + "-" + date + "-" + name + "-" + duration );
         if (timeAppointment == null || date == null || name == null || duration == null) {
             throw new NullPointerException();
         }
-        System.out.println("passato");
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
-        System.out.println("local time " + localTime.toString());
+        LocalDateTime localDateTime = LocalDateTime.of(date, localTime);
+        Client client = new Client(name, Integer.parseInt(duration));
 
-        localDateTime = LocalDateTime.of(date, localTime);
-        System.out.println("localdatetime " + localDateTime.toString());
-
-        Client client;
-        if(arrayClients.isEmpty() || !isInArrayClient(name, Integer.parseInt(duration))){
-            System.out.println("primo");
-            client = new Client(name, Integer.parseInt(duration));
-        }else {
-            System.out.println("secondo");
-            client = containsClient(name, Integer.parseInt(duration));
-        }
-        System.out.println("client " + client.toString());
         return new Appointment(client, localDateTime);
     }
 
-    private Client containsClient(String name, int duration){
-        for(Client client : arrayClients){
-            if(client.getName().equals(name) && client.getDuration() == duration){
-                return  client;
-            }
-        }
-        return null;
-    }
 
-    private boolean isInArrayClient(String name, int duration){
-        for(Client client : arrayClients){
-            if(client.getName().equals(name) && client.getDuration() == duration){
-                return  true;
-            }
-        }
-        return false;
-    }
 
     public void setArrayClientsName(ArrayList<Client> clients) {
         if (!clients.isEmpty()) {
@@ -89,7 +61,7 @@ public class NewAppointmentController {
 
     private void initializeChoiceBox() {
         try {
-            choiceBox.getItems().addAll(arrayClientsName.toArray());
+            choiceBox.setItems(arrayClientsName);
             choiceBox.setOnAction(this::setClientParam);
         } catch (NullPointerException ignored) {
         }
@@ -112,26 +84,9 @@ public class NewAppointmentController {
         return null;
     }
 
-    private void setClientParam(Event event) {
+    private void setClientParam(Event event){
         Client client = findClient((String) choiceBox.getValue());
         nameField.textProperty().set(client.getName());
         durationField.textProperty().set(client.getDuration() + "");
     }
-
-
-    /* fatto con altra verisone di set, poi cancellare
-    private ArrayList<String> getArrayUsualClientName() throws NullPointerException {
-        ArrayList<Appointment> arrayAppointments = OverviewController.getArrayUsualClient();
-        if (!arrayAppointments.isEmpty()) {
-            for (Appointment appointment1 : arrayAppointments) {
-                System.out.println(appointment1.toString());
-                arrayName.add(appointment1.getName());
-            }
-        }
-
-        System.out.println(arrayName.toString());
-        return arrayName;
-    }*/
-
-
 }

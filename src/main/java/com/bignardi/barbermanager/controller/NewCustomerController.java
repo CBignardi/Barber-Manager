@@ -1,12 +1,8 @@
 package com.bignardi.barbermanager.controller;
 
-import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-
-import java.io.IOException;
 
 public class NewCustomerController {
     @FXML
@@ -23,7 +19,7 @@ public class NewCustomerController {
     }
 
     public Client getUsualClient() throws NumberFormatException {
-        if(name == null || duration == null){
+        if (name == null || duration == null) {
             throw new NullPointerException();
         }
         return new Client(name, Integer.parseInt(duration));
