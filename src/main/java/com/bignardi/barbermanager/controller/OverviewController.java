@@ -17,10 +17,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,7 +49,7 @@ public class OverviewController {
     private DatePicker goToDay;
     private static ArrayList<Appointment> appointments = new ArrayList<>();
     private static ArrayList<Client> usualClients = new ArrayList<>();
-    private LocalDate dayView;
+    private LocalDate dayView = LocalDate.now();
     final int numberOfTables = 4;
     private final ArrayList<ListView<Appointment>> listViews = new ArrayList<>(numberOfTables);
     private final ArrayList<Label> labels = new ArrayList<>(numberOfTables);
@@ -75,7 +72,7 @@ public class OverviewController {
             listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
 
-        EXAMPLE();
+        //EXAMPLE();
         updateTables();
     }
 
@@ -194,8 +191,8 @@ public class OverviewController {
                 addAppointment(controller.getAppointment());
                 updateTables();
             }
-        } catch (NullPointerException e) {
-            showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
+        //} catch (NullPointerException e) {
+            //showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
         } catch (DateTimeException e) {
             showAlert("Wrong Appointment value", "The date value is wrong, please insert a correct date. The correct form is: hour minute (example: 15 35).");
         } catch (NumberFormatException e) {
@@ -209,35 +206,31 @@ public class OverviewController {
     private void handleOpen() {
         try {
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select two file .json");
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
             fileChooser.getExtensionFilters().add(extFilter);
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
 
             List<File> files = fileChooser.showOpenMultipleDialog(null);
-
             if (files.size() == 2) {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
                 for (File file : files) {
-                    System.out.println(file.getName());
                     if (file.getName().equals("Appointments.json")) {
-                        appointments = mapper.readValue(file, new TypeReference<>() {
+                        appointments = mapper.readValue(file, new TypeReference<ArrayList<Appointment>>() {
                         });
                     } else {
-
-                        usualClients = mapper.
-                            usualClients = mapper.readValue(file, new TypeReference<>() {
+                        usualClients = mapper.readValue(file, new TypeReference<ArrayList<Client>>() {
                         });
                     }
                 }
+                updateTables();
             } else {
                 throw new FileNotFoundException();
             }
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             showAlert("Open failed", "Wrong file selected, please select two files called: \"Appointments.json\" and \"UsualClients.json\".");
         } catch (IOException e) {
-            showAlert("Open failed", null);
+            showAlert("Open failed", "The loading of the file has failed");
         }
     }
 
@@ -254,11 +247,11 @@ public class OverviewController {
                 File fileClient = new File(directory.getAbsolutePath() + "/UsualClients.json");
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
-                mapper.writerWithDefaultPrettyPrinter().writeValue(fileAppointment, appointments);
-                mapper.writerWithDefaultPrettyPrinter().writeValue(fileClient, usualClients);
+                mapper.writeValue(fileAppointment, appointments);
+                mapper.writeValue(fileClient, usualClients);
             }
         } catch (IOException e) {
-            showAlert("Save failed", null);
+            showAlert("Save failed", "The saving of the file has failed");
         }
     }
 

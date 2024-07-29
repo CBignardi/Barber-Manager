@@ -9,7 +9,6 @@ public class Appointment {
     private String timeString;
 
     public Appointment() {
-
     }
 
     public Appointment(Client client, LocalDateTime date) {
@@ -54,6 +53,7 @@ public class Appointment {
     public void setClient(Client client) {
         this.client = client;
     }
+
 
     @Override
     public String toString() {

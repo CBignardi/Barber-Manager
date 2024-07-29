@@ -33,18 +33,29 @@ public class NewAppointmentController {
     private LocalDate date;
     private LocalDateTime localDateTime;
     private ArrayList<String> arrayClientsName = new ArrayList<>();
-    private ArrayList<Client> arrayClients;
+    private ArrayList<Client> arrayClients = new ArrayList<>();
 
     public Appointment getAppointment() throws DateTimeException, NumberFormatException {
+        System.out.println(timeAppointment + "-" + date + "-" + name + "-" + duration );
         if (timeAppointment == null || date == null || name == null || duration == null) {
             throw new NullPointerException();
         }
+        System.out.println("passato");
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
+        System.out.println("local time " + localTime.toString());
+
         localDateTime = LocalDateTime.of(date, localTime);
-        Client client = containsClient(name, Integer.parseInt(duration));
-        if(client == null){
+        System.out.println("localdatetime " + localDateTime.toString());
+
+        Client client;
+        if(arrayClients.isEmpty() || !isInArrayClient(name, Integer.parseInt(duration))){
+            System.out.println("primo");
             client = new Client(name, Integer.parseInt(duration));
+        }else {
+            System.out.println("secondo");
+            client = containsClient(name, Integer.parseInt(duration));
         }
+        System.out.println("client " + client.toString());
         return new Appointment(client, localDateTime);
     }
 
@@ -55,6 +66,15 @@ public class NewAppointmentController {
             }
         }
         return null;
+    }
+
+    private boolean isInArrayClient(String name, int duration){
+        for(Client client : arrayClients){
+            if(client.getName().equals(name) && client.getDuration() == duration){
+                return  true;
+            }
+        }
+        return false;
     }
 
     public void setArrayClientsName(ArrayList<Client> clients) {
