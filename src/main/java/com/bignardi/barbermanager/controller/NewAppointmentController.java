@@ -47,8 +47,6 @@ public class NewAppointmentController {
         return new Appointment(client, localDateTime);
     }
 
-
-
     public void setArrayClientsName(ArrayList<Client> clients) {
         if (!clients.isEmpty()) {
             arrayClients = clients;

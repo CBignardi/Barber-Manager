@@ -56,7 +56,6 @@ public class OverviewController {
     private final ArrayList<Label> labels = new ArrayList<>(numberOfTables);
     private Appointment selectedItem;
 
-
     @FXML
     public void initialize() {
         listViews.add(firstListView);
@@ -80,22 +79,24 @@ public class OverviewController {
         selectedItem = newValue;
     }
 
+    public void removeAppointmentSelected() {
+        if (selectedItem != null) {
+            removeAppointment(selectedItem);
+            removeUsualClient(selectedItem.getClient());
+            updateTables();
+        }
+    }
+
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
         addUsualClient(appointment.getClient());
         appointments.sort(Comparator.comparing(Appointment::getDate));
     }
 
-    public void removeAppointment() {
-        if (selectedItem != null) {
-            appointments.remove(selectedItem);
-            removeUsualClient();
-            updateTables();
+    public void removeAppointment(Appointment appointment) {
+        if (appointment != null) {
+            appointments.remove(appointment);
         }
-    }
-
-    public void removeUsualClient() {
-        usualClients.remove(selectedItem.getClient());
     }
 
     public void addUsualClient(Client usualClient) {
@@ -104,6 +105,12 @@ public class OverviewController {
                 usualClients.add(usualClient);
                 usualClients.sort(Comparator.comparing(Client::getName));
             }
+        }
+    }
+
+    public void removeUsualClient(Client client) {
+        if (client != null) {
+            usualClients.remove(client);
         }
     }
 
@@ -134,6 +141,11 @@ public class OverviewController {
             }
         }
         return subAppointments;
+    }
+
+    private void editClient(Client[] clients) {
+        removeUsualClient(clients[0]);
+        addUsualClient(clients[1]);
     }
 
     void showAlert(String title, String explanation) {
@@ -189,6 +201,42 @@ public class OverviewController {
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 addAppointment(controller.getAppointment());
+                updateTables();
+            }
+        } catch (NullPointerException e) {
+            showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
+        } catch (DateTimeException e) {
+            showAlert("Wrong Appointment value", "The date value is wrong, please insert a correct date. The correct form is: hour minute (example: 15 35).");
+        } catch (NumberFormatException e) {
+            showAlert("Wrong Appointment value", "The duration value is wrong, please insert a correct duration.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleEditCustomer() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("editcustomer-view.fxml"));
+            DialogPane view = loader.load();
+            EditCustomerController controller = loader.getController();
+
+            controller.setArrayClientsName(usualClients);
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Edit Customer");
+            dialog.initModality(Modality.WINDOW_MODAL);
+            dialog.setDialogPane(view);
+
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+                Client client = controller.getRemovedCustomer();
+                if (client == null) {
+                    editClient(controller.getEditedClient());
+                } else {
+                    removeUsualClient(client);
+                }
                 updateTables();
             }
         } catch (NullPointerException e) {
