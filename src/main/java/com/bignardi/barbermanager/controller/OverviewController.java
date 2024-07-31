@@ -2,7 +2,9 @@ package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
+import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.beans.value.ObservableValue;
@@ -72,7 +74,31 @@ public class OverviewController {
             listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         }
 
+        EXAMPLE();
         updateTables();
+    }
+
+    private void EXAMPLE() {
+        try {
+            List<File> files = new ArrayList<>();
+            files.add(new File("C:/Users/chrib/Desktop/EsempioBarber/UsualClients.json"));
+            files.add(new File("C:/Users/chrib/Desktop/EsempioBarber/Appointments.json"));
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            for (File file : files) {
+                if (file.getName().equals("Appointments.json")) {
+                    appointments = mapper.readValue(file, new TypeReference<ArrayList<Appointment>>() {
+                    });
+                } else {
+                    usualClients = mapper.readValue(file, new TypeReference<ArrayList<Client>>() {
+                    });
+                }
+            }
+            updateTables();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void changed(ObservableValue<? extends Appointment> observable, Appointment oldValue, Appointment newValue) {
@@ -222,7 +248,9 @@ public class OverviewController {
             DialogPane view = loader.load();
             EditCustomerController controller = loader.getController();
 
-            controller.setArrayClientsName(usualClients);
+            ObservableList<Client> observableClients = FXCollections.observableArrayList();
+            observableClients.addAll(usualClients);
+            controller.setArrayClientsName(observableClients);
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Edit Customer");
@@ -233,20 +261,14 @@ public class OverviewController {
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
                 Client client = controller.getRemovedCustomer();
                 if (client == null) {
-                    editClient(controller.getEditedClient());
+                    //editClient(controller.getArrayClient());
                 } else {
                     removeUsualClient(client);
                 }
                 updateTables();
             }
-        } catch (NullPointerException e) {
-            showAlert("Wrong Appointment value", "All the field has to be filled, please insert a correct value in each field.");
-        } catch (DateTimeException e) {
-            showAlert("Wrong Appointment value", "The date value is wrong, please insert a correct date. The correct form is: hour minute (example: 15 35).");
-        } catch (NumberFormatException e) {
-            showAlert("Wrong Appointment value", "The duration value is wrong, please insert a correct duration.");
         } catch (IOException e) {
-            e.printStackTrace();
+            showAlert("Wrong Edit configuration", "");
         }
     }
 
