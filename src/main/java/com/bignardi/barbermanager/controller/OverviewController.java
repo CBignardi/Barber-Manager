@@ -2,9 +2,7 @@ package com.bignardi.barbermanager.controller;
 
 import com.bignardi.barbermanager.model.Appointment;
 import com.bignardi.barbermanager.model.Client;
-import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.beans.value.ObservableValue;
@@ -22,11 +20,8 @@ import javafx.stage.Modality;
 import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class OverviewController {
     @FXML
@@ -85,10 +80,10 @@ public class OverviewController {
             mapper.registerModule(new JavaTimeModule());
             for (File file : files) {
                 if (file.getName().equals("Appointments.json")) {
-                    appointments = mapper.readValue(file, new TypeReference<ArrayList<Appointment>>() {
+                    appointments = mapper.readValue(file, new TypeReference<>() {
                     });
                 } else {
-                    usualClients = mapper.readValue(file, new TypeReference<ArrayList<Client>>() {
+                    usualClients = mapper.readValue(file, new TypeReference<>() {
                     });
                 }
             }
@@ -110,16 +105,52 @@ public class OverviewController {
         }
     }
 
-    public void addAppointment(Appointment appointment) {
+    public void addAppointment(Appointment appointment, boolean isAddUsualClientSelected) {
+        System.out.println("start add");
         appointments.add(appointment);
-        addUsualClient(appointment.getClient());
+        System.out.println("add");
+        if (isAddUsualClientSelected) {
+            addUsualClient(appointment.getClient());
+        }
         appointments.sort(Comparator.comparing(Appointment::getDate));
+        System.out.println("sort");
+        checkSameTimeAppointment(appointment);
     }
 
     public void removeAppointment(Appointment appointment) {
         if (appointment != null) {
             appointments.remove(appointment);
         }
+    }
+
+    private void checkSameTimeAppointment(Appointment appointment) {
+        System.out.println("appoits " + appointments.toString());
+        int appointmentIndex = getAppointmentIndex(appointment);
+        if (appointmentIndex != 0) {
+            Appointment prevoiusAppointment = appointments.get(appointmentIndex - 1);
+            System.out.println("prec " + prevoiusAppointment.toStringFull());
+            System.out.println(prevoiusAppointment.getClient().toString());
+            if (prevoiusAppointment.getDate().plusMinutes(prevoiusAppointment.getClient().getDuration()).isAfter(appointment.getDate())) {
+                showInfoSameAppointmentTime();
+            }
+        }
+    }
+
+    private int getAppointmentIndex(Appointment appointment) {
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).equals(appointment)) {
+                return i;
+            }
+        }
+        return appointments.size() + 1;
+    }
+
+    private void showInfoSameAppointmentTime() {
+        Alert info = new Alert(Alert.AlertType.INFORMATION);
+        info.setTitle("Information");
+        info.setHeaderText(null);
+        info.setContentText("The appointment inserted is in the same time of another appointment, check if you put the correct time and date.");
+        info.showAndWait();
     }
 
     public void addUsualClient(Client usualClient) {
@@ -164,11 +195,6 @@ public class OverviewController {
             }
         }
         return subAppointments;
-    }
-
-    private void editClient(Client[] clients) {
-        removeUsualClient(clients[0]);
-        addUsualClient(clients[1]);
     }
 
     void showAlert(String title, String explanation) {
@@ -223,7 +249,7 @@ public class OverviewController {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                addAppointment(controller.getAppointment());
+                addAppointment(controller.getAppointment(), controller.getIsUsualCustomerSelected());
                 updateTables();
             }
         } catch (NullPointerException e) {
@@ -256,7 +282,7 @@ public class OverviewController {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                usualClients =
+                usualClients = controller.getArrayClient();
                 updateTables();
             }
         } catch (IOException e) {
@@ -278,10 +304,10 @@ public class OverviewController {
                 mapper.registerModule(new JavaTimeModule());
                 for (File file : files) {
                     if (file.getName().equals("Appointments.json")) {
-                        appointments = mapper.readValue(file, new TypeReference<ArrayList<Appointment>>() {
+                        appointments = mapper.readValue(file, new TypeReference<>() {
                         });
                     } else {
-                        usualClients = mapper.readValue(file, new TypeReference<ArrayList<Client>>() {
+                        usualClients = mapper.readValue(file, new TypeReference<>() {
                         });
                     }
                 }

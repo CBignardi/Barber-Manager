@@ -6,9 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -28,6 +26,8 @@ public class NewAppointmentController {
     private DatePicker datePicker;
     @FXML
     private ChoiceBox choiceBox;
+    @FXML
+    private ToggleButton toggleButton;
 
     private String name;
     private String duration;
@@ -37,11 +37,14 @@ public class NewAppointmentController {
     private ArrayList<Client> arrayClients = new ArrayList<>();
 
     public Appointment getAppointment() throws DateTimeException, NumberFormatException {
+        System.out.println("prima");
         if (timeAppointment == null || date == null || name == null || duration == null) {
             throw new NullPointerException();
         }
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
+        System.out.println("done localtime");
         LocalDateTime localDateTime = LocalDateTime.of(date, localTime);
+        System.out.println("done localtimedate");
         Client client = new Client(name, Integer.parseInt(duration));
 
         return new Appointment(client, localDateTime);
@@ -82,9 +85,22 @@ public class NewAppointmentController {
         return null;
     }
 
-    private void setClientParam(Event event){
+    private void setClientParam(Event event) {
         Client client = findClient((String) choiceBox.getValue());
         nameField.textProperty().set(client.getName());
         durationField.textProperty().set(client.getDuration() + "");
+    }
+
+    public boolean getIsUsualCustomerSelected(){
+        return toggleButton.isSelected();
+    }
+
+    @FXML
+    public void handleChangeToggleText(){
+        if(toggleButton.isSelected()){
+            toggleButton.setText("Do");
+        }else{
+            toggleButton.setText("Do not");
+        }
     }
 }

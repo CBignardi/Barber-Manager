@@ -9,8 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class EditCustomerController {
     @FXML
@@ -26,13 +26,11 @@ public class EditCustomerController {
 
     @FXML
     public void initialize() {
-        System.out.println("initialize");
         nameField.textProperty().addListener((observable, oldValue, newValue) -> name = newValue);
         durationField.textProperty().addListener((observable, oldValue, newValue) -> duration = newValue);
     }
 
     private void initializeChoiceBox() {
-        System.out.println("initialize choice box");
         try {
             updateChoiceBox();
             choiceBox.setOnAction(this::setClientParam);
@@ -41,12 +39,10 @@ public class EditCustomerController {
     }
 
     private void updateChoiceBox() {
-        System.out.println("update choice");
         choiceBox.setItems(arrayClients);
     }
 
     private void setClientParam(Event event) {
-        System.out.println("set client param");
         try {
             selectedClient = choiceBox.getValue();
             nameField.textProperty().set(selectedClient.getName());
@@ -55,30 +51,19 @@ public class EditCustomerController {
         }
     }
 
-    private Client findClient(String name) {
-        System.out.println("find client");
-        for (Client client : arrayClients) {
-            if (client.getName().equals(name)) {
-                return client;
-            }
-        }
-        return new Client();
-    }
-
     public void setArrayClientsName(ObservableList<Client> clients) {
-        System.out.println("set Arrayclient name");
         if (!clients.isEmpty()) {
             arrayClients = clients;
         }
         initializeChoiceBox();
     }
 
-    public ObservableList<Client> getArrayClient() {
+    public ArrayList<Client> getArrayClient() {
         int index = getClientIndex(selectedClient);
         arrayClients.get(index).setName(name);
-        arrayClients.get(index).setName(duration);
+        arrayClients.get(index).setDuration(Integer.parseInt(duration));
         arrayClients.sort(Comparator.comparing(Client::getName));
-        return arrayClients;
+        return new ArrayList<>(arrayClients);
     }
 
     private int getClientIndex(Client client) {
@@ -87,23 +72,19 @@ public class EditCustomerController {
                 return i;
             }
         }
-        return 0;
+        return arrayClients.size() + 1;
     }
 
     @FXML
     public void removeCustomer(ActionEvent event) {
-        System.out.println("remove customer");
         if (selectedClient != null) {
             clearClientRemoved();
         }
     }
 
     private void clearClientRemoved() {
-        System.out.println("clear client removed");
         arrayClients.remove(selectedClient);
         choiceBox.setValue(new Client());
         updateChoiceBox();
     }
-
-
 }
