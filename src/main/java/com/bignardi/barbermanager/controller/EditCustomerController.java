@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.util.Comparator;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class EditCustomerController {
     @FXML
@@ -22,7 +23,6 @@ public class EditCustomerController {
     private String duration;
     private Client selectedClient;
     private ObservableList<Client> arrayClients = FXCollections.observableArrayList();
-    private boolean isRemoveCustomer = false;
 
     @FXML
     public void initialize() {
@@ -74,20 +74,27 @@ public class EditCustomerController {
     }
 
     public ObservableList<Client> getArrayClient() {
-        arrayClients.remove(selectedClient);
-        arrayClients.add(new Client(name, Integer.parseInt(duration)));
+        int index = getClientIndex(selectedClient);
+        arrayClients.get(index).setName(name);
+        arrayClients.get(index).setName(duration);
         arrayClients.sort(Comparator.comparing(Client::getName));
         return arrayClients;
+    }
+
+    private int getClientIndex(Client client) {
+        for (int i = 0; i < arrayClients.size(); i++) {
+            if (arrayClients.get(i).equals(client)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     @FXML
     public void removeCustomer(ActionEvent event) {
         System.out.println("remove customer");
         if (selectedClient != null) {
-            isRemoveCustomer = true;
             clearClientRemoved();
-        } else {
-            isRemoveCustomer = false;
         }
     }
 
@@ -98,13 +105,5 @@ public class EditCustomerController {
         updateChoiceBox();
     }
 
-    public Client getRemovedCustomer() {
-        System.out.println("get removed customer");
-        if (isRemoveCustomer) {
-            return selectedClient;
-        } else {
-            return null;
-        }
-    }
 
 }

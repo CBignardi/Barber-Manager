@@ -25,10 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class OverviewController {
@@ -259,12 +256,7 @@ public class OverviewController {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                Client client = controller.getRemovedCustomer();
-                if (client == null) {
-                    //editClient(controller.getArrayClient());
-                } else {
-                    removeUsualClient(client);
-                }
+                usualClients =
                 updateTables();
             }
         } catch (IOException e) {
