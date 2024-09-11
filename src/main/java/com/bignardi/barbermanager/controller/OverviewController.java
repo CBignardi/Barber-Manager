@@ -63,7 +63,7 @@ public class OverviewController {
 
         for (ListView<Appointment> listView : listViews) {
             listView.getSelectionModel().selectedItemProperty().addListener(this::changed);
-            listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         }
 
         EXAMPLE();
@@ -106,14 +106,11 @@ public class OverviewController {
     }
 
     public void addAppointment(Appointment appointment, boolean isAddUsualClientSelected) {
-        System.out.println("start add");
         appointments.add(appointment);
-        System.out.println("add");
         if (isAddUsualClientSelected) {
             addUsualClient(appointment.getClient());
         }
         appointments.sort(Comparator.comparing(Appointment::getDate));
-        System.out.println("sort");
         checkSameTimeAppointment(appointment);
     }
 
@@ -124,12 +121,9 @@ public class OverviewController {
     }
 
     private void checkSameTimeAppointment(Appointment appointment) {
-        System.out.println("appoits " + appointments.toString());
         int appointmentIndex = getAppointmentIndex(appointment);
         if (appointmentIndex != 0) {
             Appointment prevoiusAppointment = appointments.get(appointmentIndex - 1);
-            System.out.println("prec " + prevoiusAppointment.toStringFull());
-            System.out.println(prevoiusAppointment.getClient().toString());
             if (prevoiusAppointment.getDate().plusMinutes(prevoiusAppointment.getClient().getDuration()).isAfter(appointment.getDate())) {
                 showInfoSameAppointmentTime();
             }

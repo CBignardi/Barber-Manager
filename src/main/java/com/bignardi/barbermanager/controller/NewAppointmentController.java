@@ -37,14 +37,11 @@ public class NewAppointmentController {
     private ArrayList<Client> arrayClients = new ArrayList<>();
 
     public Appointment getAppointment() throws DateTimeException, NumberFormatException {
-        System.out.println("prima");
         if (timeAppointment == null || date == null || name == null || duration == null) {
             throw new NullPointerException();
         }
         LocalTime localTime = LocalTime.parse(timeAppointment, DateTimeFormatter.ofPattern("HH mm"));
-        System.out.println("done localtime");
         LocalDateTime localDateTime = LocalDateTime.of(date, localTime);
-        System.out.println("done localtimedate");
         Client client = new Client(name, Integer.parseInt(duration));
 
         return new Appointment(client, localDateTime);

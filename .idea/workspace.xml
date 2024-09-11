@@ -9,9 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="COMPLETE">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/barberManager_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="cf8af6b9-c515-4024-bc8f-96b943edf418" name="Changes" comment="add jar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,39 +51,39 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.App.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "JAR Application.AppJar.executor": "Run",
-    "Maven.barberManager [javafx:run].executor": "Run",
-    "Maven.barberManager.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/chrib/IdeaProjects/barberManager/out/artifacts/barberManager_jar/barberManager.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.AppJar.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.barberManager [javafx:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.barberManager.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chrib/IdeaProjects/barberManager/out/artifacts/barberManager_jar/barberManager.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlserver.localdb",
-      "postgresql",
-      "sqlserver"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlserver.localdb&quot;,
+      &quot;postgresql&quot;,
+      &quot;sqlserver&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\chrib\IdeaProjects\barberManager\src\main\resources\com\bignardi\barbermanager" />
@@ -93,18 +91,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\chrib\IdeaProjects\barberManager\src\main\resources\com\bignardi\barbermanager\icons" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="AppJar" type="JarApplication">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/barberManager_jar/barberManager.jar" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\chrib\IdeaProjects\barberManager" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method v="2">
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="barberManager:jar" />
-        </option>
-      </method>
-    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -155,7 +141,11 @@
       <workItem from="1722326764205" duration="4144000" />
       <workItem from="1722428916701" duration="4960000" />
       <workItem from="1722500954750" duration="3595000" />
-      <workItem from="1722515597760" duration="8069000" />
+      <workItem from="1722515597760" duration="8113000" />
+      <workItem from="1723900582733" duration="272000" />
+      <workItem from="1725367910825" duration="1203000" />
+      <workItem from="1726040752766" duration="200000" />
+      <workItem from="1726060940279" duration="121000" />
     </task>
     <task id="LOCAL-00001" summary="Update Scene Builder">
       <option name="closed" value="true" />
@@ -437,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722522988547</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="add jar">
+      <option name="closed" value="true" />
+      <created>1722524258258</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1722524258258</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,7 +460,8 @@
     <MESSAGE value="All correct" />
     <MESSAGE value="Update" />
     <MESSAGE value="COMPLETE" />
-    <option name="LAST_COMMIT_MESSAGE" value="COMPLETE" />
+    <MESSAGE value="add jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="add jar" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
